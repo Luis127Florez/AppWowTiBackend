@@ -1,0 +1,1 @@
+{"version":3,"file":"asignacionModel.js","sourceRoot":"","sources":["../../Models/asignacionModel.ts"],"names":[],"mappings":";;;;;AAAA,yCAAuC;AACvC,wDAAgC;AAEhC,MAAM,YAAY,GAAG,YAAE,CAAC,MAAM,CAAC,aAAa,EAAC;IACzC,UAAU,EAAC;QACP,IAAI,EAAE,qBAAS,CAAC,OAAO;KAC1B;IACD,MAAM,EAAC;QACH,IAAI,EAAC,qBAAS,CAAC,OAAO;KACzB;CACJ,CAAC,CAAA;AAEF,kBAAe,YAAY,CAAC"}

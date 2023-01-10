@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-01-2023 a las 17:52:13
+-- Tiempo de generación: 10-01-2023 a las 14:57:51
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `appwowti`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `asignacions`
+--
+
+CREATE TABLE `asignacions` (
+  `id` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `asignacions`
+--
+
+INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt`) VALUES
+(1, 12250, 3, '2023-01-07 15:40:31', '2023-01-07 15:40:31'),
+(4, 525533, 2, '2023-01-07 15:20:40', '2023-01-07 16:12:48'),
+(5, 69584, 2, '2023-01-07 15:42:34', '2023-01-07 15:42:34');
 
 -- --------------------------------------------------------
 
@@ -57,6 +80,13 @@ INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacio
 --
 
 --
+-- Indices de la tabla `asignacions`
+--
+ALTER TABLE `asignacions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUser` (`idUser`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -67,10 +97,26 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `asignacions`
+--
+ALTER TABLE `asignacions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `asignacions`
+--
+ALTER TABLE `asignacions`
+  ADD CONSTRAINT `asignacions_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

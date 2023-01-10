@@ -75,10 +75,10 @@ const PatchUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         if (!user)
-            return res.status(404).json({ msg: "Usuario no registrado" });
+            return res.status(404).json({ msg: "Usuario no registrado", user: null });
         if (contraseña !== user.dataValues.contraseña)
-            return res.json({ msg: "contraseña erronea" });
-        res.json(user);
+            return res.json({ msg: "contraseña erronea", user: null });
+        res.json({ user, msg: "sign in" });
     }
     catch (error) {
         console.log(error);

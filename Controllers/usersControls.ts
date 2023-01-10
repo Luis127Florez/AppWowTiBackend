@@ -53,7 +53,7 @@ export const PatchUser = async (req: Request, res: Response)=>{
     const {body} = req;
     const {email, contraseña} = body;
 
-    if(!email || !contraseña) return res.status(404).json({msg: "se requiere email y contraseña para esta peticion"})
+    if(!email || !contraseña) return res.status(404).json({msg: "se requiere email y contraseña para esta peticion" })
 
     try {
         const user = await Users.findOne({
@@ -61,10 +61,10 @@ export const PatchUser = async (req: Request, res: Response)=>{
                 email: email
             }
         });
-        if (!user) return  res.status(404).json({msg: "Usuario no registrado"});
+        if (!user) return  res.status(404).json({msg: "Usuario no registrado", user:null });
         
-        if(contraseña !== user.dataValues.contraseña) return res.json({msg: "contraseña erronea"})
-        res.json(user);
+        if(contraseña !== user.dataValues.contraseña) return res.json({msg: "contraseña erronea" , user:null})
+        res.json({user, msg:"sign in"});
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: "hable con el admin"})

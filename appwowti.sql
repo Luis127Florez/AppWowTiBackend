@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-01-2023 a las 14:57:51
+-- Tiempo de generación: 11-01-2023 a las 17:03:02
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -57,6 +57,7 @@ CREATE TABLE `usuarios` (
   `contraseña` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `N_identificacion` int(20) NOT NULL,
   `estado` tinyint(4) NOT NULL,
+  `role` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -65,15 +66,15 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacion`, `estado`, `createdAt`, `updatedAt`) VALUES
-(1, 'Luis florez', 'florezgilluisantony@gmail.com', 'luis123', 1002028561, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'alfred', 'alfred@gmail.com', 'alfred321', 2147483647, 0, '0000-00-00 00:00:00', '2023-01-06 16:38:53'),
-(3, 'robert', 'robert@gmail.com', 'robert987', 1002458756, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'josena jera', 'josenajera@gmail.com', 'josenajera78', 1003654125, 1, '2023-01-06 14:34:19', '2023-01-06 14:34:19'),
-(6, 'pedro', 'pedro@gmail.com', 'pedro524', 1000235648, 1, '2023-01-06 15:10:18', '2023-01-06 15:10:18'),
-(7, 'migel', 'migel@gmail.com', 'migel524', 1047483612, 0, '2023-01-06 15:11:11', '2023-01-06 16:37:14'),
-(8, 'morris', 'morris@gmail.com', 'morris524', 100202456, 1, '2023-01-06 15:37:30', '2023-01-06 15:37:30'),
-(9, 'franco', 'franco@gmail.com', 'franco524', 100254584, 1, '2023-01-06 15:37:58', '2023-01-06 15:37:58');
+INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacion`, `estado`, `role`, `createdAt`, `updatedAt`) VALUES
+(1, 'Luis florez', 'florezgilluisantony@gmail.com', 'luis123', 1002028561, 1, 'ADMIN', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'alfred', 'alfred@gmail.com', 'alfred321', 2147483647, 0, 'USER', '0000-00-00 00:00:00', '2023-01-06 16:38:53'),
+(3, 'robert', 'robert@gmail.com', 'robert987', 1002458756, 1, 'USER', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'josena jera', 'josenajera@gmail.com', 'josenajera78', 1003654125, 1, 'USER', '2023-01-06 14:34:19', '2023-01-06 14:34:19'),
+(6, 'pedro', 'pedro@gmail.com', 'pedro524', 1000235648, 1, 'USER', '2023-01-06 15:10:18', '2023-01-06 15:10:18'),
+(7, 'migel', 'migel@gmail.com', 'migel524', 1047483612, 0, 'USER', '2023-01-06 15:11:11', '2023-01-06 16:37:14'),
+(8, 'morris', 'morris@gmail.com', 'morris524', 100202456, 1, 'USER', '2023-01-06 15:37:30', '2023-01-06 15:37:30'),
+(9, 'franco', 'franco@gmail.com', 'franco524', 100254584, 1, 'USER', '2023-01-06 15:37:58', '2023-01-06 15:37:58');
 
 --
 -- Índices para tablas volcadas

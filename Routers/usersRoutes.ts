@@ -1,14 +1,15 @@
 import { Router } from "express";
 import { GetUser, GetUserByid, PatchUser, PostUser, UpdateUser,DeleteUser } from "../Controllers/usersControls";
+import { verificarToken, verificarTokenADMiN } from "../helpers/authJwt";
 
 
 const userRoutes = Router();
 
-userRoutes.get('/', GetUser);
-userRoutes.get('/:id', GetUserByid);
+userRoutes.get('/', verificarToken,GetUser);
+userRoutes.get('/:id',verificarToken, GetUserByid);
 userRoutes.post('/', PostUser);
 userRoutes.patch('/',PatchUser);
-userRoutes.put('/:id',UpdateUser);
-userRoutes.delete('/:id', DeleteUser )
+userRoutes.put('/:id',verificarToken,UpdateUser);
+userRoutes.delete('/:id',verificarTokenADMiN, DeleteUser )
 
 export default userRoutes;

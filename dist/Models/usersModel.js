@@ -21,6 +21,9 @@ const Users = db_1.default.define('usuarios', {
     estado: {
         type: sequelize_1.DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    role: {
+        type: sequelize_1.DataTypes.STRING
     }
 });
 exports.default = Users;

@@ -17,6 +17,9 @@ const Users = db.define('usuarios',{
     estado:{
         type:DataTypes.BOOLEAN,
         defaultValue: true 
+    },
+    role:{
+        type: DataTypes.STRING
     }
 })
 

@@ -35,7 +35,10 @@ class Server {
         });
     }
     midelwares() {
-        this.App.use((0, cors_1.default)());
+        this.App.use((0, cors_1.default)({
+            origin: 'http://127.0.0.1:5173',
+            credentials: true
+        }));
         this.App.use(express_1.default.json());
         this.App.use(express_1.default.static('public'));
     }

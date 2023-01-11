@@ -26,7 +26,10 @@ class Server {
         });
     }
     midelwares(){
-        this.App.use(cors());
+        this.App.use(cors({
+            origin:'http://127.0.0.1:5173',
+            credentials:true
+        }));
         this.App.use(express.json());
         this.App.use(express.static('public'));
     }

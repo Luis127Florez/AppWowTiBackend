@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { usuario } from "../helpers/types";
 import Users from "../Models/usersModel";
+import jwt from "jsonwebtoken";
 
 export const GetUser = async(req: Request , res: Response)=>{
     try {
@@ -64,7 +65,14 @@ export const PatchUser = async (req: Request, res: Response)=>{
         if (!user) return  res.status(404).json({msg: "Usuario no registrado", user:null });
         
         if(contraseña !== user.dataValues.contraseña) return res.json({msg: "contraseña erronea" , user:null})
-        res.json({user, msg:"sign in"});
+
+        console.log(user.dataValues.id);
+        const token = jwt.sign({
+            id: user.dataValues.id
+        },'wowti',{expiresIn:43200})
+
+        res.json({user, token, msg:"sign in"});
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: "hable con el admin"})

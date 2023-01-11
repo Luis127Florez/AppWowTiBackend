@@ -19,11 +19,11 @@ const verificarToken = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
     try {
         const { token } = req.headers;
         if (!token)
-            return res.status(403).json("token null");
+            return res.status(403).json({ user: null, msg: "token null" });
         const decode = jsonwebtoken_1.default.verify(token, 'wowti');
         const user = yield usersModel_1.default.findByPk(decode.id);
         if (!user)
-            return res.status(404).json("Not user found");
+            return res.status(404).json({ user: null, msg: "Not user found" });
         next();
     }
     catch (error) {
@@ -36,13 +36,13 @@ const verificarTokenADMiN = (req, res, next) => __awaiter(void 0, void 0, void 0
     try {
         const { token } = req.headers;
         if (!token)
-            return res.status(403).json("token null");
+            return res.status(403).json({ user: null, msg: "token null" });
         const decode = jsonwebtoken_1.default.verify(token, 'wowti');
         const user = yield usersModel_1.default.findByPk(decode.id);
         if (!user)
-            return res.status(404).json("Not user found");
+            return res.status(404).json({ user: null, msg: "Not user found" });
         if (user.dataValues.role !== "ADMIN")
-            return res.status(404).json("user is not ADMIN");
+            return res.status(404).json({ user, msg: "user is not ADMIN" });
         next();
     }
     catch (error) {

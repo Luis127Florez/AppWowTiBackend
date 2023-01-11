@@ -6,10 +6,10 @@ import { TypeJwt } from "./types";
 export const verificarToken = async (req: Request, res: Response, next:NextFunction) =>{
     try {
         const {token}:any = req.headers
-        if(!token)return res.status(403).json("token null");
+        if(!token)return res.status(403).json({user:null , msg:"token null"});
         const decode = Jwt.verify(token , 'wowti') as TypeJwt
         const user = await Users.findByPk(decode.id);   
-        if (!user)return res.status(404).json("Not user found");
+        if (!user)return res.status(404).json({user:null , msg:"Not user found"});
         next();
     } catch (error) {
         console.log(error);
@@ -21,11 +21,11 @@ export const verificarToken = async (req: Request, res: Response, next:NextFunct
 export const verificarTokenADMiN = async(req: Request, res:Response, next:NextFunction)=>{
     try {
         const {token}:any = req.headers
-        if(!token)return res.status(403).json("token null");
+        if(!token)return res.status(403).json({user:null , msg:"token null"});
         const decode = Jwt.verify(token , 'wowti') as TypeJwt
         const user = await Users.findByPk(decode.id);   
-        if (!user)return res.status(404).json("Not user found");
-        if (user.dataValues.role !== "ADMIN") return res.status(404).json("user is not ADMIN");
+        if (!user)return res.status(404).json({user:null , msg:"Not user found"});
+        if (user.dataValues.role !== "ADMIN") return res.status(404).json({user, msg:"user is not ADMIN"});
         next();    
     } catch (error) {
         console.log(error);

@@ -53,14 +53,14 @@ export const UpdateAsignacion = async(req: Request, res: Response)=>{
 }
 
 export const DeleteAsignacion = async(req: Request, res: Response)=>{
-    const {id} = req.params
+    const {id} = req.params;
     try {
         const asignacion = await Asignaciones.findByPk(id);
-        if(!asignacion) return res.status(404).json("no se encontro un user con ese id")
+        if(!asignacion) return res.status(404).json("no se encontro un user con ese id");
         asignacion.destroy();
         res.json({msg: "asignacion eliminada con exito"});
     } catch (error) {
         console.log(error);
-        res.status(500).json({msg: "hable con el admin"})
+        res.status(500).json({msg: "hable con el admin"});
     }
 }

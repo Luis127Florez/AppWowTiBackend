@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2023 a las 21:17:14
+-- Tiempo de generación: 12-01-2023 a las 21:44:23
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -83,6 +83,7 @@ CREATE TABLE `detallecompra` (
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `region` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `almacenamiento` varchar(350) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `sistemaOperativo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,

@@ -20,11 +20,11 @@ const asignaciones_1 = __importDefault(require("../Routers/asignaciones"));
 class Server {
     constructor() {
         this.apiPaht = {
-            users: '/app/users',
-            asignaciones: '/app/asignaciones'
+            users: "/app/users",
+            asignaciones: "/app/asignaciones",
         };
         this.App = (0, express_1.default)();
-        this.Port = process.env.Port || '8002';
+        this.Port = process.env.Port || "8002";
         this.midelwares();
         this.rutas();
         this.conexion();
@@ -40,7 +40,7 @@ class Server {
             credentials: true
         }));
         this.App.use(express_1.default.json());
-        this.App.use(express_1.default.static('public'));
+        this.App.use(express_1.default.static("public"));
     }
     rutas() {
         this.App.use(this.apiPaht.users, usersRoutes_1.default);
@@ -50,10 +50,10 @@ class Server {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield db_1.default.authenticate();
-                console.log('Connection has been established successfully.');
+                console.log("Connection has been established successfully.");
             }
             catch (error) {
-                console.error('Unable to connect to the database:', error);
+                console.error("Unable to connect to the database:", error);
             }
         });
     }

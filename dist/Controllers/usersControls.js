@@ -30,15 +30,19 @@ const PostUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { email } = body;
     if (!email)
-        return res.status(404).json({ msg: "se requiere email para esta peticion" });
+        return res
+            .status(404)
+            .json({ msg: "se requiere email para esta peticion" });
     try {
         const alreadyUser = yield usersModel_1.default.findOne({
             where: {
-                email: email
-            }
+                email: email,
+            },
         });
         if (alreadyUser)
-            return res.status(404).json({ msg: "ya existe un usuario con ese email" });
+            return res
+                .status(404)
+                .json({ msg: "ya existe un usuario con ese email" });
         const users = yield usersModel_1.default.build(body);
         console.log(users);
         yield users.save();
@@ -55,7 +59,9 @@ const GetUserByid = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const user = yield usersModel_1.default.findByPk(id);
         if (!user)
-            return res.status(404).json({ msg: 'no se encontro un usuario con ese id' });
+            return res
+                .status(404)
+                .json({ msg: "no se encontro un usuario con ese id" });
         res.json(user);
     }
     catch (error) {
@@ -68,12 +74,14 @@ const PatchUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { email, contraseña } = body;
     if (!email || !contraseña)
-        return res.status(404).json({ msg: "se requiere email y contraseña para esta peticion" });
+        return res
+            .status(404)
+            .json({ msg: "se requiere email y contraseña para esta peticion" });
     try {
         const user = yield usersModel_1.default.findOne({
             where: {
-                email: email
-            }
+                email: email,
+            },
         });
         if (!user)
             return res.status(404).json({ msg: "Usuario no registrado", user: null });
@@ -81,8 +89,8 @@ const PatchUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.json({ msg: "contraseña erronea", user: null });
         console.log(user.dataValues.id);
         const token = jsonwebtoken_1.default.sign({
-            id: user.dataValues.id
-        }, 'wowti', { expiresIn: 43200 });
+            id: user.dataValues.id,
+        }, "wowti", { expiresIn: 43200 });
         res.json({ user, token, msg: "sign in" });
     }
     catch (error) {
@@ -97,7 +105,9 @@ const UpdateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const user = yield usersModel_1.default.findByPk(id);
         if (!user)
-            return res.status(404).json({ msg: 'no se encontro un usuario con ese id' });
+            return res
+                .status(404)
+                .json({ msg: "no se encontro un usuario con ese id" });
         yield user.update(body);
         res.json(user);
     }
@@ -112,9 +122,11 @@ const DeleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const user = yield usersModel_1.default.findByPk(id);
         if (!user)
-            return res.status(404).json({ msg: 'no se encontro un usuario con ese id' });
-        yield user.update({ "estado": false });
-        res.json({ msg: 'usuario eliminado' });
+            return res
+                .status(404)
+                .json({ msg: "no se encontro un usuario con ese id" });
+        yield user.update({ estado: false });
+        res.json({ msg: "usuario eliminado" });
     }
     catch (error) {
         console.log(error);

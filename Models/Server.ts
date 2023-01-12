@@ -1,8 +1,9 @@
-import express, { Application } from "express";
-import cors from "cors";
-import userRoutes from "../Routers/usersRoutes";
-import db from "../conexion/db";
-import asignacionesRoutes from "../Routers/asignaciones";
+import express, { Application } from 'express'
+import cors from 'cors';
+import userRoutes from '../Routers/usersRoutes';
+import db from '../conexion/db';
+import asignacionesRoutes from '../Routers/asignacionesRoutes';
+
 
 class Server {
   private App: Application;

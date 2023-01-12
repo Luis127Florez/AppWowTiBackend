@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-01-2023 a las 17:03:02
+-- Tiempo de generación: 12-01-2023 a las 21:17:14
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -43,6 +43,56 @@ INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt
 (1, 12250, 3, '2023-01-07 15:40:31', '2023-01-07 15:40:31'),
 (4, 525533, 2, '2023-01-07 15:20:40', '2023-01-07 16:12:48'),
 (5, 69584, 2, '2023-01-07 15:42:34', '2023-01-07 15:42:34');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `total` float NOT NULL,
+  `estado` tinyint(4) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detallecompra`
+--
+
+CREATE TABLE `detallecompra` (
+  `id_compra` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `idMaquina` int(11) NOT NULL,
+  `precioUnitario` float NOT NULL,
+  `importe` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `maquinas`
+--
+
+CREATE TABLE `maquinas` (
+  `id` int(11) NOT NULL,
+  `region` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `almacenamiento` varchar(350) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `sistemaOperativo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `redes` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `complementos` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `duracionPlazo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -88,6 +138,25 @@ ALTER TABLE `asignacions`
   ADD KEY `idUser` (`idUser`);
 
 --
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `detallecompra`
+--
+ALTER TABLE `detallecompra`
+  ADD KEY `id_compra` (`id_compra`),
+  ADD KEY `idMaquina` (`idMaquina`);
+
+--
+-- Indices de la tabla `maquinas`
+--
+ALTER TABLE `maquinas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -104,6 +173,18 @@ ALTER TABLE `asignacions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `maquinas`
+--
+ALTER TABLE `maquinas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -118,6 +199,13 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `asignacions`
   ADD CONSTRAINT `asignacions_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `detallecompra`
+--
+ALTER TABLE `detallecompra`
+  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`),
+  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idMaquina`) REFERENCES `maquinas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

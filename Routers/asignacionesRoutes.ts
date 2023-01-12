@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { DeleteAsignacion, GetAsignacion, GetAsignacionByIdUser, PostAsignacion, UpdateAsignacion } from "../Controllers/asignacion";
+import { DeleteAsignacion, GetAsignacion, GetAsignacionByIdUser, PostAsignacion, UpdateAsignacion } from "../Controllers/asignacionControls";
 
 const asignacionesRoutes = Router();
 

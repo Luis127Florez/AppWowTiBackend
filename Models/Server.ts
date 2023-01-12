@@ -3,6 +3,7 @@ import cors from 'cors';
 import userRoutes from '../Routers/usersRoutes';
 import db from '../conexion/db';
 import asignacionesRoutes from '../Routers/asignacionesRoutes';
+import comprasRoutes from '../Routers/comprasRoutes';
 
 
 class Server {
@@ -10,7 +11,8 @@ class Server {
     private Port: string;
     private apiPaht={
         users: '/app/users',
-        asignaciones: '/app/asignaciones'
+        asignaciones: '/app/asignaciones',
+        comprasRoutes: '/app/compras'
     }
     constructor() {
         this.App = express();
@@ -36,6 +38,7 @@ class Server {
     rutas(){
         this.App.use(this.apiPaht.users, userRoutes)
         this.App.use(this.apiPaht.asignaciones, asignacionesRoutes)
+        this.App.use(this.apiPaht.comprasRoutes, comprasRoutes)
     }
     async conexion(){
         try{ 

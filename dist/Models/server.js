@@ -16,7 +16,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const usersRoutes_1 = __importDefault(require("../Routers/usersRoutes"));
 const db_1 = __importDefault(require("../conexion/db"));
-const asignaciones_1 = __importDefault(require("../Routers/asignaciones"));
+const asignacionesRoutes_1 = __importDefault(require("../Routers/asignacionesRoutes"));
 class Server {
     constructor() {
         this.apiPaht = {
@@ -44,7 +44,7 @@ class Server {
     }
     rutas() {
         this.App.use(this.apiPaht.users, usersRoutes_1.default);
-        this.App.use(this.apiPaht.asignaciones, asignaciones_1.default);
+        this.App.use(this.apiPaht.asignaciones, asignacionesRoutes_1.default);
     }
     conexion() {
         return __awaiter(this, void 0, void 0, function* () {

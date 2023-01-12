@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-01-2023 a las 20:57:14
+-- Tiempo de generación: 12-01-2023 a las 21:17:14
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -88,7 +88,10 @@ CREATE TABLE `maquinas` (
   `sistemaOperativo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `redes` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
   `complementos` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `duracionPlazo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL
+  `duracionPlazo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------

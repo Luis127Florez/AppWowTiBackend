@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<< HEAD
 -- Tiempo de generación: 12-01-2023 a las 21:17:14
+=======
+-- Tiempo de generación: 12-01-2023 a las 22:46:29
+>>>>>>> dev
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -59,6 +63,13 @@ CREATE TABLE `compras` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id`, `idUser`, `total`, `estado`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 91.08, 1, '2023-01-12 21:47:05', '2023-01-12 21:47:05');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +86,14 @@ CREATE TABLE `detallecompra` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `detallecompra`
+--
+
+INSERT INTO `detallecompra` (`id_compra`, `cantidad`, `idMaquina`, `precioUnitario`, `importe`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 1, 18.38, 36.76, '2023-01-12 22:29:28', '2023-01-12 22:29:28'),
+(1, 2, 2, 27.16, 54.32, '2023-01-12 22:32:44', '2023-01-12 22:32:44');
+
 -- --------------------------------------------------------
 
 --
@@ -83,6 +102,7 @@ CREATE TABLE `detallecompra` (
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `region` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `almacenamiento` varchar(350) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `sistemaOperativo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -93,6 +113,14 @@ CREATE TABLE `maquinas` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `maquinas`
+--
+
+INSERT INTO `maquinas` (`id`, `descripcion`, `region`, `almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'Cloud VPS S', 'European Union (Germany)', '{tamaño: 200 , tipo:\"GB\" , disco:\"SSD\"}', 'Windows Server', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', '{ObjectStorage:\"none\", BackupSpace:\"none\", ServerManagement:\"unmanaged\",Monitoring:\"none\", sll:\"none\"}', '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
+(2, 'Cloud VPS S', 'United States (West)', '{tamaño: 400 , tipo:\"GB\" , disco:\"SSD\"}', 'ubuntu 4.0', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', '{ObjectStorage:\"500 GB Object Storage in United States\", BackupSpace:\"none\", ServerManagement:\"unmanaged\",Monitoring:\"none\", sll:\"none\"}', '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
 
 -- --------------------------------------------------------
 
@@ -176,13 +204,13 @@ ALTER TABLE `asignacions`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

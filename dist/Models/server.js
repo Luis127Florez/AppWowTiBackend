@@ -17,11 +17,13 @@ const cors_1 = __importDefault(require("cors"));
 const usersRoutes_1 = __importDefault(require("../Routers/usersRoutes"));
 const db_1 = __importDefault(require("../conexion/db"));
 const asignacionesRoutes_1 = __importDefault(require("../Routers/asignacionesRoutes"));
+const comprasRoutes_1 = __importDefault(require("../Routers/comprasRoutes"));
 class Server {
     constructor() {
         this.apiPaht = {
             users: '/app/users',
-            asignaciones: '/app/asignaciones'
+            asignaciones: '/app/asignaciones',
+            comprasRoutes: '/app/compras'
         };
         this.App = (0, express_1.default)();
         this.Port = process.env.Port || '8002';
@@ -45,6 +47,7 @@ class Server {
     rutas() {
         this.App.use(this.apiPaht.users, usersRoutes_1.default);
         this.App.use(this.apiPaht.asignaciones, asignacionesRoutes_1.default);
+        this.App.use(this.apiPaht.comprasRoutes, comprasRoutes_1.default);
     }
     conexion() {
         return __awaiter(this, void 0, void 0, function* () {

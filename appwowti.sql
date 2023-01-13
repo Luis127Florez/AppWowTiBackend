@@ -6,6 +6,9 @@
 -- Tiempo de generación: 13-01-2023 a las 20:08:42
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
+-- Tiempo de generación: 13-01-2023 a las 15:26:55
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -85,6 +88,40 @@ CREATE TABLE `bandwidth` (
 
 INSERT INTO `bandwidth` (`id`, `descripcion`, `detalles`, `precio`) VALUES
 (1, '32 TB + Unlimited InOut', '200 Mbit/s Connection', 0);
+-- Estructura de tabla para la tabla `backupspace`
+--
+
+CREATE TABLE `backupspace` (
+  `tamaño` int(11) NOT NULL,
+  `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `complementos`
+--
+
+CREATE TABLE `complementos` (
+  `id` int(11) NOT NULL,
+  `ObjectStorage` int(11) NOT NULL,
+  `BackupSpace` int(11) NOT NULL,
+  `ServerManagement` int(11) NOT NULL,
+  `Monitoring` int(11) NOT NULL,
+  `SSL` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `complementos`
+--
+
+INSERT INTO `complementos` (`id`, `ObjectStorage`, `BackupSpace`, `ServerManagement`, `Monitoring`, `SSL`) VALUES
+(1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -135,6 +172,20 @@ INSERT INTO `detallecompra` (`id_compra`, `cantidad`, `idMaquina`, `precioUnitar
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ipv4`
+--
+
+CREATE TABLE `ipv4` (
+  `id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `maquinas`
 --
 
@@ -145,7 +196,7 @@ CREATE TABLE `maquinas` (
   `almacenamiento` varchar(350) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `sistemaOperativo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `redes` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `complementos` longtext COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `complementos` int(11) NOT NULL,
   `duracionPlazo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
@@ -157,8 +208,66 @@ CREATE TABLE `maquinas` (
 --
 
 INSERT INTO `maquinas` (`id`, `descripcion`, `region`, `almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'Cloud VPS S', 'European Union (Germany)', '{tamaño: 200 , tipo:\"GB\" , disco:\"SSD\"}', 'Windows Server', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', '{ObjectStorage:\"none\", BackupSpace:\"none\", ServerManagement:\"unmanaged\",Monitoring:\"none\", sll:\"none\"}', '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
-(2, 'Cloud VPS S', 'United States (West)', '{tamaño: 400 , tipo:\"GB\" , disco:\"SSD\"}', 'ubuntu 4.0', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', '{ObjectStorage:\"500 GB Object Storage in United States\", BackupSpace:\"none\", ServerManagement:\"unmanaged\",Monitoring:\"none\", sll:\"none\"}', '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
+(1, 'Cloud VPS S', 'European Union (Germany)', '{tamaño: 200 , tipo:\"GB\" , disco:\"SSD\"}', 'Windows Server', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', 1, '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
+(2, 'Cloud VPS S', 'United States (West)', '{tamaño: 400 , tipo:\"GB\" , disco:\"SSD\"}', 'ubuntu 4.0', '{PrivateNetworking:\"No Private Networking\",Bandwidth:\"32 tv out\", IPv4:\"1 Ip address\"}', 1, '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `monitoring`
+--
+
+CREATE TABLE `monitoring` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `objectstorage`
+--
+
+CREATE TABLE `objectstorage` (
+  `tamaño` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servermanagement`
+--
+
+CREATE TABLE `servermanagement` (
+  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `id` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sll`
+--
+
+CREATE TABLE `sll` (
+  `id` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -360,6 +469,15 @@ ALTER TABLE `asignacions`
 -- Indices de la tabla `bandwidth`
 --
 ALTER TABLE `bandwidth`
+-- Indices de la tabla `backupspace`
+--
+ALTER TABLE `backupspace`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `complementos`
+--
+ALTER TABLE `complementos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -376,9 +494,40 @@ ALTER TABLE `detallecompra`
   ADD KEY `idMaquina` (`idMaquina`);
 
 --
+-- Indices de la tabla `ipv4`
+--
+ALTER TABLE `ipv4`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `complementos` (`complementos`);
+
+--
+-- Indices de la tabla `monitoring`
+--
+ALTER TABLE `monitoring`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `objectstorage`
+--
+ALTER TABLE `objectstorage`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `servermanagement`
+--
+ALTER TABLE `servermanagement`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `sll`
+--
+ALTER TABLE `sll`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -438,6 +587,15 @@ ALTER TABLE `asignacions`
 -- AUTO_INCREMENT de la tabla `bandwidth`
 --
 ALTER TABLE `bandwidth`
+-- AUTO_INCREMENT de la tabla `backupspace`
+--
+ALTER TABLE `backupspace`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `complementos`
+--
+ALTER TABLE `complementos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -445,6 +603,12 @@ ALTER TABLE `bandwidth`
 --
 ALTER TABLE `compras`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ipv4`
+--
+ALTER TABLE `ipv4`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
@@ -475,6 +639,28 @@ ALTER TABLE `regiones`
 --
 ALTER TABLE `sistemaos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+-- AUTO_INCREMENT de la tabla `monitoring`
+--
+ALTER TABLE `monitoring`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `objectstorage`
+--
+ALTER TABLE `objectstorage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `servermanagement`
+--
+ALTER TABLE `servermanagement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sll`
+--
+ALTER TABLE `sll`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -505,6 +691,10 @@ ALTER TABLE `detallecompra`
 ALTER TABLE `redescomplemento`
   ADD CONSTRAINT `redescomplemento_ibfk_1` FOREIGN KEY (`id_redPrivada`) REFERENCES `redesprivadas` (`id`),
   ADD CONSTRAINT `redescomplemento_ibfk_2` FOREIGN KEY (`id_bandwidth`) REFERENCES `bandwidth` (`id`);
+-- Filtros para la tabla `maquinas`
+--
+ALTER TABLE `maquinas`
+  ADD CONSTRAINT `maquinas_ibfk_1` FOREIGN KEY (`complementos`) REFERENCES `complementos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,0 +1,1 @@
+{"version":3,"file":"servermanagementModel.js","sourceRoot":"","sources":["../../Models/servermanagementModel.ts"],"names":[],"mappings":";;;;;AAAA,yCAAsC;AACtC,wDAAgC;AAEhC,MAAM,gBAAgB,GAAG,YAAE,CAAC,MAAM,CAAC,kBAAkB,EAAC;IAClD,IAAI,EAAC;QACD,IAAI,EAAE,qBAAS,CAAC,MAAM;KACzB;IACD,MAAM,EAAC;QACH,IAAI,EAAE,qBAAS,CAAC,KAAK;KACxB;CACJ,CAAC,CAAC;AAEH,kBAAe,gBAAgB,CAAC"}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2023 a las 15:26:55
+-- Tiempo de generación: 13-01-2023 a las 20:24:55
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -60,6 +60,13 @@ CREATE TABLE `backupspace` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `backupspace`
+--
+
+INSERT INTO `backupspace` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+(200, 'gb', 'sbdbsubn', 8.49, 1, '2023-01-13 17:48:03', '2023-01-13 17:48:03');
+
 -- --------------------------------------------------------
 
 --
@@ -72,14 +79,14 @@ CREATE TABLE `complementos` (
   `BackupSpace` int(11) NOT NULL,
   `ServerManagement` int(11) NOT NULL,
   `Monitoring` int(11) NOT NULL,
-  `SSL` int(11) NOT NULL
+  `sll_` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `complementos`
 --
 
-INSERT INTO `complementos` (`id`, `ObjectStorage`, `BackupSpace`, `ServerManagement`, `Monitoring`, `SSL`) VALUES
+INSERT INTO `complementos` (`id`, `ObjectStorage`, `BackupSpace`, `ServerManagement`, `Monitoring`, `sll_`) VALUES
 (1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
@@ -184,6 +191,13 @@ CREATE TABLE `monitoring` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `monitoring`
+--
+
+INSERT INTO `monitoring` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'full', 8.49, '2023-01-13 17:43:55', '2023-01-13 17:43:55');
+
 -- --------------------------------------------------------
 
 --
@@ -200,6 +214,13 @@ CREATE TABLE `objectstorage` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `objectstorage`
+--
+
+INSERT INTO `objectstorage` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+(200, 'gb', 'object full', 8.49, 1, '2023-01-13 17:46:30', '2023-01-13 17:46:30');
+
 -- --------------------------------------------------------
 
 --
@@ -214,6 +235,13 @@ CREATE TABLE `servermanagement` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `servermanagement`
+--
+
+INSERT INTO `servermanagement` (`tipo`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+('gbfzdfz', 8.49, 1, '2023-01-13 17:48:47', '2023-01-13 17:48:47');
+
 -- --------------------------------------------------------
 
 --
@@ -227,6 +255,13 @@ CREATE TABLE `sll` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `sll`
+--
+
+INSERT INTO `sll` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'full', 8.49, '2023-01-13 17:49:24', '2023-01-13 17:49:24');
 
 -- --------------------------------------------------------
 
@@ -258,7 +293,7 @@ INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacio
 (6, 'pedro', 'pedro@gmail.com', 'pedro524', 1000235648, 1, 'USER', '2023-01-06 15:10:18', '2023-01-06 15:10:18'),
 (7, 'migel', 'migel@gmail.com', 'migel524', 1047483612, 0, 'USER', '2023-01-06 15:11:11', '2023-01-06 16:37:14'),
 (8, 'morris', 'morris@gmail.com', 'morris524', 100202456, 1, 'USER', '2023-01-06 15:37:30', '2023-01-06 15:37:30'),
-(9, 'franco', 'franco@gmail.com', 'franco524', 100254584, 1, 'USER', '2023-01-06 15:37:58', '2023-01-06 15:37:58');
+(9, 'franco', 'franco@gmail.com', '12345678', 100254584, 1, 'USER', '2023-01-06 15:37:58', '2023-01-06 15:37:58');
 
 --
 -- Índices para tablas volcadas
@@ -281,7 +316,12 @@ ALTER TABLE `backupspace`
 -- Indices de la tabla `complementos`
 --
 ALTER TABLE `complementos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ObjectStorage` (`ObjectStorage`),
+  ADD KEY `BackupSpace` (`BackupSpace`),
+  ADD KEY `ServerManagement` (`ServerManagement`),
+  ADD KEY `Monitoring` (`Monitoring`),
+  ADD KEY `sll_` (`sll_`);
 
 --
 -- Indices de la tabla `compras`
@@ -353,7 +393,7 @@ ALTER TABLE `asignacions`
 -- AUTO_INCREMENT de la tabla `backupspace`
 --
 ALTER TABLE `backupspace`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `complementos`
@@ -383,25 +423,25 @@ ALTER TABLE `maquinas`
 -- AUTO_INCREMENT de la tabla `monitoring`
 --
 ALTER TABLE `monitoring`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `objectstorage`
 --
 ALTER TABLE `objectstorage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `servermanagement`
 --
 ALTER TABLE `servermanagement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `sll`
 --
 ALTER TABLE `sll`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -418,6 +458,16 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `asignacions`
   ADD CONSTRAINT `asignacions_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`);
+
+--
+-- Filtros para la tabla `complementos`
+--
+ALTER TABLE `complementos`
+  ADD CONSTRAINT `complementos_ibfk_1` FOREIGN KEY (`ObjectStorage`) REFERENCES `objectstorage` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_2` FOREIGN KEY (`BackupSpace`) REFERENCES `backupspace` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_3` FOREIGN KEY (`ServerManagement`) REFERENCES `servermanagement` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_4` FOREIGN KEY (`Monitoring`) REFERENCES `monitoring` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_5` FOREIGN KEY (`sll_`) REFERENCES `sll` (`id`);
 
 --
 -- Filtros para la tabla `detallecompra`

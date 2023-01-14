@@ -1,25 +1,35 @@
 import { DataTypes } from "sequelize";
 import db from "../conexion/db";
 
-const maquinas = db.define('maquinas',{
-    region:{
-        type: DataTypes.STRING
+const Maquinas = db.define('maquinas',{
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true
     },
-    almacenamiento:{
-        type: DataTypes.STRING
+    descripcion:{
+        type:DataTypes.STRING
+    },
+    region:{
+        type: DataTypes.INTEGER
+    },
+    id_almacenamiento:{
+        type: DataTypes.INTEGER
     },
     sistemaOperativo:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     redes:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     complementos:{
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     duracionPlazo:{
         type: DataTypes.STRING
+    },
+    precio:{
+        type: DataTypes.FLOAT
     }
 });
 
-export default maquinas;
+export default Maquinas;

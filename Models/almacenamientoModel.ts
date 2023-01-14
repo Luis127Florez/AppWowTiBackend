@@ -2,8 +2,9 @@ import {  DataTypes } from "sequelize";
 import db from "../conexion/db";
 
 const Almacenamientos = db.define('almacenamientos',{
-    idAlmacenamiento:{
-        type: DataTypes.INTEGER
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey:true
     },
     tamañoAlmacenamiento:{
         type:DataTypes.STRING

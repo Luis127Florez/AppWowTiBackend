@@ -6,8 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../conexion/db"));
 const Almacenamientos = db_1.default.define('almacenamientos', {
-    idAlmacenamiento: {
-        type: sequelize_1.DataTypes.INTEGER
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        primaryKey: true
     },
     tamañoAlmacenamiento: {
         type: sequelize_1.DataTypes.STRING

@@ -14,9 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetCompras = void 0;
 const comprasModel_1 = __importDefault(require("../Models/comprasModel"));
+const usersModel_1 = __importDefault(require("../Models/usersModel"));
 const GetCompras = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const compras = yield comprasModel_1.default.findAll();
+        comprasModel_1.default.belongsTo(usersModel_1.default, {
+            foreignKey: "idUser",
+            targetKey: "id",
+        });
+        const compras = yield comprasModel_1.default.findAll({ include: [{ model: usersModel_1.default }] });
         res.json(compras);
     }
     catch (error) {

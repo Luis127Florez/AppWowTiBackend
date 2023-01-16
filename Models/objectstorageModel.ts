@@ -1,7 +1,11 @@
 import { DataTypes } from "sequelize";
 import db from "../conexion/db";
 
-const objectstorages = db.define('objectstorage',{
+const objectstorages = db.define('objectstorages',{
+    id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true
+    },
     tamaño:{
         type: DataTypes.INTEGER
     },

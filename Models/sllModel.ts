@@ -1,7 +1,11 @@
 import { DataTypes } from "sequelize";
 import db from "../conexion/db";
 
-const Sll = db.define('sll',{
+const Sll = db.define('slls',{
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey:true 
+    },
     tipo:{
         type: DataTypes.STRING
     },

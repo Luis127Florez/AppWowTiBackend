@@ -3,7 +3,8 @@ import db from "../conexion/db";
 
 const RedesComplemento = db.define('redesComplemento',{
     id:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        primaryKey: true
     },
     id_redPrivada:{
         type:DataTypes.INTEGER

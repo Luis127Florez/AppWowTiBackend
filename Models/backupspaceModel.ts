@@ -1,7 +1,11 @@
 import { DataTypes } from "sequelize";
 import db from "../conexion/db";
 
-const backupspaces = db.define('backupspace',{
+const backupspaces = db.define('backupspaces',{
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true
+    },
     tamaño:{
         type: DataTypes.INTEGER
     },

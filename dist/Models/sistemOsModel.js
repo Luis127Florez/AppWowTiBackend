@@ -7,7 +7,8 @@ const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../conexion/db"));
 const sistemaOs = db_1.default.define('sistemaOs', {
     id: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.INTEGER,
+        primaryKey: true
     },
     tipo: {
         type: sequelize_1.DataTypes.STRING

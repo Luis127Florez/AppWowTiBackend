@@ -3,7 +3,8 @@ import db from "../conexion/db";
 
 const sistemaOs = db.define('sistemaOs',{
     id:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        primaryKey:true
     },
     tipo:{
         type:DataTypes.STRING

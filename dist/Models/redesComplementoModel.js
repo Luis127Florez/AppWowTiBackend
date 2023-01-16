@@ -7,7 +7,8 @@ const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../conexion/db"));
 const RedesComplemento = db_1.default.define('redesComplemento', {
     id: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.INTEGER,
+        primaryKey: true
     },
     id_redPrivada: {
         type: sequelize_1.DataTypes.INTEGER

@@ -2,8 +2,9 @@ import {  DataTypes } from "sequelize";
 import db from "../conexion/db";
 
 const Regiones = db.define('regiones',{
-    idRegiones:{
-        type: DataTypes.INTEGER
+    id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true
     },
     nombreRegion:{
         type:DataTypes.STRING

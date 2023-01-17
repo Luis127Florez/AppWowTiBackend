@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../conexion/db"));
-const detallesCompras = db_1.default.define('detallecompra', {
+const detallesCompras = db_1.default.define('detalle_compras', {
     id_compra: {
         type: sequelize_1.DataTypes.INTEGER
     },
@@ -22,4 +22,5 @@ const detallesCompras = db_1.default.define('detallecompra', {
         type: sequelize_1.DataTypes.FLOAT
     }
 });
+exports.default = detallesCompras;
 //# sourceMappingURL=detallesComprasModels.js.map

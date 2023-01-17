@@ -43,6 +43,7 @@ class Server {
     this.App.use(this.apiPaht.users, userRoutes);
     this.App.use(this.apiPaht.asignaciones, asignacionesRoutes);
     this.App.use(this.apiPaht.maquinas, maquinasRoutes);
+    this.App.use(this.apiPaht.comprasRoutes, comprasRoutes);
   }
 
   async conexion() {

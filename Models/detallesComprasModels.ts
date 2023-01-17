@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../conexion/db";
 
-const detallesCompras = db.define('detallecompra',{
+const detallesCompras = db.define('detalle_compras',{
     id_compra:{
         type: DataTypes.INTEGER
     },
@@ -18,3 +18,4 @@ const detallesCompras = db.define('detallecompra',{
         type: DataTypes.FLOAT
     }
 })
+export default detallesCompras;

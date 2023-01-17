@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2023 a las 22:24:58
+-- Tiempo de generación: 17-01-2023 a las 15:22:08
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -68,26 +68,10 @@ INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bandwidth`
+-- Estructura de tabla para la tabla `backupspaces`
 --
 
-CREATE TABLE `bandwidth` (
-  `id` int(11) NOT NULL,
-  `descripcion` varchar(50) NOT NULL,
-  `detalles` varchar(50) NOT NULL,
-  `precio` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `bandwidth`
---
-
-INSERT INTO `bandwidth` (`id`, `descripcion`, `detalles`, `precio`) VALUES
-(1, '32 TB + Unlimited InOut', '200 Mbit/s Connection', 0);
--- Estructura de tabla para la tabla `backupspace`
---
-
-CREATE TABLE `backupspace` (
+CREATE TABLE `backupspaces` (
   `tamaño` int(11) NOT NULL,
   `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -98,19 +82,19 @@ CREATE TABLE `backupspace` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `backupspace`
+-- Volcado de datos para la tabla `backupspaces`
 --
 
-INSERT INTO `backupspace` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `backupspaces` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
 (200, 'gb', 'sbdbsubn', 8.49, 1, '2023-01-13 17:48:03', '2023-01-13 17:48:03');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bandwidth`
+-- Estructura de tabla para la tabla `bandwidths`
 --
 
-CREATE TABLE `bandwidth` (
+CREATE TABLE `bandwidths` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `detalles` varchar(50) NOT NULL,
@@ -120,10 +104,10 @@ CREATE TABLE `bandwidth` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Volcado de datos para la tabla `bandwidth`
+-- Volcado de datos para la tabla `bandwidths`
 --
 
-INSERT INTO `bandwidth` (`id`, `descripcion`, `detalles`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `bandwidths` (`id`, `descripcion`, `detalles`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, '32 TB + Unlimited InOut', '200 Mbit/s Connection', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -170,15 +154,17 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`id`, `idUser`, `total`, `estado`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 91.08, 1, '2023-01-12 21:47:05', '2023-01-12 21:47:05');
+(1, 2, 47, 1, '2023-01-14 18:50:56', '2023-01-14 18:50:56'),
+(2, 8, 69, 1, '2023-01-16 17:51:10', '2023-01-16 17:51:10');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detallecompra`
+-- Estructura de tabla para la tabla `detalle_compras`
 --
 
-CREATE TABLE `detallecompra` (
+CREATE TABLE `detalle_compras` (
+  `id` int(11) NOT NULL,
   `id_compra` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `idMaquina` int(11) NOT NULL,
@@ -189,20 +175,22 @@ CREATE TABLE `detallecompra` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `detallecompra`
+-- Volcado de datos para la tabla `detalle_compras`
 --
 
-INSERT INTO `detallecompra` (`id_compra`, `cantidad`, `idMaquina`, `precioUnitario`, `importe`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 1, 18.38, 36.76, '2023-01-12 22:29:28', '2023-01-12 22:29:28'),
-(1, 2, 2, 27.16, 54.32, '2023-01-12 22:32:44', '2023-01-12 22:32:44');
+INSERT INTO `detalle_compras` (`id`, `id_compra`, `cantidad`, `idMaquina`, `precioUnitario`, `importe`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 2, 1, 18.38, 36.76, '2023-01-14 18:47:41', '2023-01-14 18:47:41'),
+(2, 1, 2, 1, 27.16, 36.76, '2023-01-14 19:19:48', '2023-01-14 19:19:48'),
+(3, 2, 1, 1, 27.16, 27.16, '2023-01-16 17:51:39', '2023-01-16 17:51:39'),
+(4, 2, 2, 1, 27.16, 54.32, '2023-01-16 17:52:19', '2023-01-16 17:52:19');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ipv4`
+-- Estructura de tabla para la tabla `ipv4s`
 --
 
-CREATE TABLE `ipv4` (
+CREATE TABLE `ipv4s` (
   `id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio` float NOT NULL,
@@ -211,10 +199,10 @@ CREATE TABLE `ipv4` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `ipv4`
+-- Volcado de datos para la tabla `ipv4s`
 --
 
-INSERT INTO `ipv4` (`id`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `ipv4s` (`id`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 2, 8.49, '2023-01-13 21:12:25', '2023-01-13 21:12:25');
 
 -- --------------------------------------------------------
@@ -227,7 +215,7 @@ CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `region` int(11) NOT NULL,
-  `almacenamiento` int(11) NOT NULL,
+  `id_almacenamiento` int(11) NOT NULL,
   `sistemaOperativo` int(11) NOT NULL,
   `redes` int(11) NOT NULL,
   `complementos` int(11) NOT NULL,
@@ -241,17 +229,17 @@ CREATE TABLE `maquinas` (
 -- Volcado de datos para la tabla `maquinas`
 --
 
-INSERT INTO `maquinas` (`id`, `descripcion`, `region`, `almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `maquinas` (`id`, `descripcion`, `region`, `id_almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 'Cloud VPS S', 1, 1, 1, 1, 1, '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
 (2, 'Cloud VPS S', 1, 1, 1, 1, 1, '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `monitoring`
+-- Estructura de tabla para la tabla `monitorings`
 --
 
-CREATE TABLE `monitoring` (
+CREATE TABLE `monitorings` (
   `id` int(11) NOT NULL,
   `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
@@ -260,19 +248,19 @@ CREATE TABLE `monitoring` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `monitoring`
+-- Volcado de datos para la tabla `monitorings`
 --
 
-INSERT INTO `monitoring` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `monitorings` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 'full', 8.49, '2023-01-13 17:43:55', '2023-01-13 17:43:55');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `objectstorage`
+-- Estructura de tabla para la tabla `objectstorages`
 --
 
-CREATE TABLE `objectstorage` (
+CREATE TABLE `objectstorages` (
   `tamaño` int(11) NOT NULL,
   `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
@@ -283,10 +271,10 @@ CREATE TABLE `objectstorage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `objectstorage`
+-- Volcado de datos para la tabla `objectstorages`
 --
 
-INSERT INTO `objectstorage` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `objectstorages` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
 (200, 'gb', 'object full', 8.49, 1, '2023-01-13 17:46:30', '2023-01-13 17:46:30');
 
 -- --------------------------------------------------------
@@ -409,10 +397,10 @@ INSERT INTO `regiones` (`id`, `nombreRegion`, `precioUnitarioRegion`, `createdAt
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `servermanagement`
+-- Estructura de tabla para la tabla `servermanagements`
 --
 
-CREATE TABLE `servermanagement` (
+CREATE TABLE `servermanagements` (
   `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `id` int(11) NOT NULL,
@@ -421,10 +409,10 @@ CREATE TABLE `servermanagement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `servermanagement`
+-- Volcado de datos para la tabla `servermanagements`
 --
 
-INSERT INTO `servermanagement` (`tipo`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `servermanagements` (`tipo`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
 ('gbfzdfz', 8.49, 1, '2023-01-13 17:48:47', '2023-01-13 17:48:47');
 
 -- --------------------------------------------------------
@@ -452,10 +440,10 @@ INSERT INTO `sistemaos` (`id`, `tipo`, `versionSO`, `precio`, `createdAt`, `upda
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sll`
+-- Estructura de tabla para la tabla `slls`
 --
 
-CREATE TABLE `sll` (
+CREATE TABLE `slls` (
   `id` int(11) NOT NULL,
   `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
@@ -464,10 +452,10 @@ CREATE TABLE `sll` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `sll`
+-- Volcado de datos para la tabla `slls`
 --
 
-INSERT INTO `sll` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `slls` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 'full', 8.49, '2023-01-13 17:49:24', '2023-01-13 17:49:24');
 
 -- --------------------------------------------------------
@@ -520,18 +508,15 @@ ALTER TABLE `asignacions`
   ADD KEY `idUser` (`idUser`);
 
 --
--- Indices de la tabla `bandwidth`
+-- Indices de la tabla `backupspaces`
 --
-ALTER TABLE `bandwidth`
--- Indices de la tabla `backupspace`
---
-ALTER TABLE `backupspace`
+ALTER TABLE `backupspaces`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `bandwidth`
+-- Indices de la tabla `bandwidths`
 --
-ALTER TABLE `bandwidth`
+ALTER TABLE `bandwidths`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -549,19 +534,21 @@ ALTER TABLE `complementos`
 -- Indices de la tabla `compras`
 --
 ALTER TABLE `compras`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idUser` (`idUser`);
 
 --
--- Indices de la tabla `detallecompra`
+-- Indices de la tabla `detalle_compras`
 --
-ALTER TABLE `detallecompra`
+ALTER TABLE `detalle_compras`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_compra` (`id_compra`),
   ADD KEY `idMaquina` (`idMaquina`);
 
 --
--- Indices de la tabla `ipv4`
+-- Indices de la tabla `ipv4s`
 --
-ALTER TABLE `ipv4`
+ALTER TABLE `ipv4s`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -571,20 +558,20 @@ ALTER TABLE `maquinas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `complementos` (`complementos`),
   ADD KEY `region` (`region`),
-  ADD KEY `almacenamiento` (`almacenamiento`),
+  ADD KEY `almacenamiento` (`id_almacenamiento`),
   ADD KEY `sistemaOperativo` (`sistemaOperativo`),
   ADD KEY `redes` (`redes`);
 
 --
--- Indices de la tabla `monitoring`
+-- Indices de la tabla `monitorings`
 --
-ALTER TABLE `monitoring`
+ALTER TABLE `monitorings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `objectstorage`
+-- Indices de la tabla `objectstorages`
 --
-ALTER TABLE `objectstorage`
+ALTER TABLE `objectstorages`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -615,9 +602,9 @@ ALTER TABLE `regiones`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `servermanagement`
+-- Indices de la tabla `servermanagements`
 --
-ALTER TABLE `servermanagement`
+ALTER TABLE `servermanagements`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -627,40 +614,9 @@ ALTER TABLE `sistemaos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `sll`
+-- Indices de la tabla `slls`
 --
-ALTER TABLE `sll`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `panelsapps`
---
-ALTER TABLE `panelsapps`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `redescomplemento`
---
-ALTER TABLE `redescomplemento`
-  ADD KEY `id_redPrivada` (`id_redPrivada`),
-  ADD KEY `id_bandwidth` (`id_bandwidth`);
-
---
--- Indices de la tabla `redesprivadas`
---
-ALTER TABLE `redesprivadas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `regiones`
---
-ALTER TABLE `regiones`
-  ADD PRIMARY KEY (`idRegiones`);
-
---
--- Indices de la tabla `sistemaos`
---
-ALTER TABLE `sistemaos`
+ALTER TABLE `slls`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -686,18 +642,15 @@ ALTER TABLE `asignacions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de la tabla `bandwidth`
+-- AUTO_INCREMENT de la tabla `backupspaces`
 --
-ALTER TABLE `bandwidth`
--- AUTO_INCREMENT de la tabla `backupspace`
---
-ALTER TABLE `backupspace`
+ALTER TABLE `backupspaces`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `bandwidth`
+-- AUTO_INCREMENT de la tabla `bandwidths`
 --
-ALTER TABLE `bandwidth`
+ALTER TABLE `bandwidths`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -710,12 +663,18 @@ ALTER TABLE `complementos`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `ipv4`
+-- AUTO_INCREMENT de la tabla `detalle_compras`
 --
-ALTER TABLE `ipv4`
+ALTER TABLE `detalle_compras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `ipv4s`
+--
+ALTER TABLE `ipv4s`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -725,37 +684,15 @@ ALTER TABLE `maquinas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `panelsapps`
+-- AUTO_INCREMENT de la tabla `monitorings`
 --
-ALTER TABLE `panelsapps`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
-
---
--- AUTO_INCREMENT de la tabla `redesprivadas`
---
-ALTER TABLE `redesprivadas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `regiones`
---
-ALTER TABLE `regiones`
-  MODIFY `idRegiones` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `sistemaos`
---
-ALTER TABLE `sistemaos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
--- AUTO_INCREMENT de la tabla `monitoring`
---
-ALTER TABLE `monitoring`
+ALTER TABLE `monitorings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `objectstorage`
+-- AUTO_INCREMENT de la tabla `objectstorages`
 --
-ALTER TABLE `objectstorage`
+ALTER TABLE `objectstorages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -777,9 +714,9 @@ ALTER TABLE `regiones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `servermanagement`
+-- AUTO_INCREMENT de la tabla `servermanagements`
 --
-ALTER TABLE `servermanagement`
+ALTER TABLE `servermanagements`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -789,9 +726,9 @@ ALTER TABLE `sistemaos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `sll`
+-- AUTO_INCREMENT de la tabla `slls`
 --
-ALTER TABLE `sll`
+ALTER TABLE `slls`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -814,31 +751,33 @@ ALTER TABLE `asignacions`
 -- Filtros para la tabla `complementos`
 --
 ALTER TABLE `complementos`
-  ADD CONSTRAINT `complementos_ibfk_1` FOREIGN KEY (`ObjectStorage`) REFERENCES `objectstorage` (`id`),
-  ADD CONSTRAINT `complementos_ibfk_2` FOREIGN KEY (`BackupSpace`) REFERENCES `backupspace` (`id`),
-  ADD CONSTRAINT `complementos_ibfk_3` FOREIGN KEY (`ServerManagement`) REFERENCES `servermanagement` (`id`),
-  ADD CONSTRAINT `complementos_ibfk_4` FOREIGN KEY (`Monitoring`) REFERENCES `monitoring` (`id`),
-  ADD CONSTRAINT `complementos_ibfk_5` FOREIGN KEY (`sll_`) REFERENCES `sll` (`id`);
+  ADD CONSTRAINT `complementos_ibfk_1` FOREIGN KEY (`ObjectStorage`) REFERENCES `objectstorages` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_2` FOREIGN KEY (`BackupSpace`) REFERENCES `backupspaces` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_3` FOREIGN KEY (`ServerManagement`) REFERENCES `servermanagements` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_4` FOREIGN KEY (`Monitoring`) REFERENCES `monitorings` (`id`),
+  ADD CONSTRAINT `complementos_ibfk_5` FOREIGN KEY (`sll_`) REFERENCES `slls` (`id`);
 
 --
--- Filtros para la tabla `detallecompra`
+-- Filtros para la tabla `compras`
 --
-ALTER TABLE `detallecompra`
-  ADD CONSTRAINT `detallecompra_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`),
-  ADD CONSTRAINT `detallecompra_ibfk_2` FOREIGN KEY (`idMaquina`) REFERENCES `maquinas` (`id`);
+ALTER TABLE `compras`
+  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`);
 
 --
--- Filtros para la tabla `redescomplemento`
+-- Filtros para la tabla `detalle_compras`
 --
-ALTER TABLE `redescomplemento`
-  ADD CONSTRAINT `redescomplemento_ibfk_1` FOREIGN KEY (`id_redPrivada`) REFERENCES `redesprivadas` (`id`),
-  ADD CONSTRAINT `redescomplemento_ibfk_2` FOREIGN KEY (`id_bandwidth`) REFERENCES `bandwidth` (`id`);
+ALTER TABLE `detalle_compras`
+  ADD CONSTRAINT `detalle_compras_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`),
+  ADD CONSTRAINT `detalle_compras_ibfk_2` FOREIGN KEY (`id_compra`) REFERENCES `maquinas` (`id`),
+  ADD CONSTRAINT `detalle_compras_ibfk_3` FOREIGN KEY (`idMaquina`) REFERENCES `maquinas` (`id`);
+
+--
 -- Filtros para la tabla `maquinas`
 --
 ALTER TABLE `maquinas`
   ADD CONSTRAINT `maquinas_ibfk_1` FOREIGN KEY (`complementos`) REFERENCES `complementos` (`id`),
   ADD CONSTRAINT `maquinas_ibfk_2` FOREIGN KEY (`region`) REFERENCES `regiones` (`id`),
-  ADD CONSTRAINT `maquinas_ibfk_3` FOREIGN KEY (`almacenamiento`) REFERENCES `almacenamientos` (`id`),
+  ADD CONSTRAINT `maquinas_ibfk_3` FOREIGN KEY (`id_almacenamiento`) REFERENCES `almacenamientos` (`id`),
   ADD CONSTRAINT `maquinas_ibfk_4` FOREIGN KEY (`sistemaOperativo`) REFERENCES `sistemaos` (`id`),
   ADD CONSTRAINT `maquinas_ibfk_5` FOREIGN KEY (`redes`) REFERENCES `redescomplementos` (`id`);
 
@@ -846,8 +785,8 @@ ALTER TABLE `maquinas`
 -- Filtros para la tabla `redescomplementos`
 --
 ALTER TABLE `redescomplementos`
-  ADD CONSTRAINT `redescomplementos_ibfk_1` FOREIGN KEY (`id_ipv4`) REFERENCES `ipv4` (`id`),
-  ADD CONSTRAINT `redescomplementos_ibfk_2` FOREIGN KEY (`id_bandwidth`) REFERENCES `bandwidth` (`id`),
+  ADD CONSTRAINT `redescomplementos_ibfk_1` FOREIGN KEY (`id_ipv4`) REFERENCES `ipv4s` (`id`),
+  ADD CONSTRAINT `redescomplementos_ibfk_2` FOREIGN KEY (`id_bandwidth`) REFERENCES `bandwidths` (`id`),
   ADD CONSTRAINT `redescomplementos_ibfk_3` FOREIGN KEY (`id_redPrivada`) REFERENCES `redesprivadas` (`id`);
 COMMIT;
 

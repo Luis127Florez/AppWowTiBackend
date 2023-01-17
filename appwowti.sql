@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-01-2023 a las 15:22:08
+-- Tiempo de generación: 17-01-2023 a las 17:01:35
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -213,7 +213,8 @@ INSERT INTO `ipv4s` (`id`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUE
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `region` int(11) NOT NULL,
   `id_almacenamiento` int(11) NOT NULL,
   `sistemaOperativo` int(11) NOT NULL,
@@ -229,9 +230,9 @@ CREATE TABLE `maquinas` (
 -- Volcado de datos para la tabla `maquinas`
 --
 
-INSERT INTO `maquinas` (`id`, `descripcion`, `region`, `id_almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'Cloud VPS S', 1, 1, 1, 1, 1, '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
-(2, 'Cloud VPS S', 1, 1, 1, 1, 1, '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
+INSERT INTO `maquinas` (`id`, `nombre`, `descripcion`, `region`, `id_almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'Cloud VPS S', '', 1, 1, 1, 1, 1, '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
+(2, 'Cloud VPS S', '', 1, 1, 1, 1, 1, '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
 
 -- --------------------------------------------------------
 

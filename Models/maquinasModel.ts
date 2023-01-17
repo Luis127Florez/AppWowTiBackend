@@ -6,6 +6,9 @@ const Maquinas = db.define('maquinas',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
+    nombre:{
+        type:DataTypes.STRING
+    },
     descripcion:{
         type:DataTypes.STRING
     },

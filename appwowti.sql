@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-01-2023 a las 17:01:35
+-- Tiempo de generación: 18-01-2023 a las 23:21:01
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -63,7 +63,9 @@ CREATE TABLE `asignacions` (
 INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt`) VALUES
 (1, 12250, 3, '2023-01-07 15:40:31', '2023-01-07 15:40:31'),
 (4, 525533, 2, '2023-01-07 15:20:40', '2023-01-07 16:12:48'),
-(5, 69584, 2, '2023-01-07 15:42:34', '2023-01-07 15:42:34');
+(5, 69584, 2, '2023-01-07 15:42:34', '2023-01-07 15:42:34'),
+(19, 6543, 2, '2023-01-18 16:46:43', '2023-01-18 16:46:43'),
+(20, 6543, 2, '2023-01-18 19:39:44', '2023-01-18 19:39:44');
 
 -- --------------------------------------------------------
 
@@ -213,15 +215,13 @@ INSERT INTO `ipv4s` (`id`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUE
 
 CREATE TABLE `maquinas` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `region` int(11) NOT NULL,
   `id_almacenamiento` int(11) NOT NULL,
   `sistemaOperativo` int(11) NOT NULL,
   `redes` int(11) NOT NULL,
   `complementos` int(11) NOT NULL,
   `duracionPlazo` varchar(250) COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `precio` float NOT NULL,
+  `id_producMaquina` int(11) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -230,9 +230,9 @@ CREATE TABLE `maquinas` (
 -- Volcado de datos para la tabla `maquinas`
 --
 
-INSERT INTO `maquinas` (`id`, `nombre`, `descripcion`, `region`, `id_almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'Cloud VPS S', '', 1, 1, 1, 1, 1, '1 mes', 18.38, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
-(2, 'Cloud VPS S', '', 1, 1, 1, 1, 1, '1 mes', 27.16, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
+INSERT INTO `maquinas` (`id`, `region`, `id_almacenamiento`, `sistemaOperativo`, `redes`, `complementos`, `duracionPlazo`, `id_producMaquina`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, 1, 1, 1, '1 mes', 1, '2023-01-12 21:49:20', '2023-01-12 21:49:20'),
+(2, 1, 1, 1, 1, 1, '1 mes', 2, '2023-01-12 21:49:20', '2023-01-12 21:49:20');
 
 -- --------------------------------------------------------
 
@@ -330,6 +330,27 @@ INSERT INTO `panelsapps` (`id`, `tipo`, `version`, `precio`, `createdAt`, `updat
 (32, 'Docker', '1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (33, 'LAMP', '1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (34, 'Webmin', '1', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `productmaquinas`
+--
+
+CREATE TABLE `productmaquinas` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `precio` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `productmaquinas`
+--
+
+INSERT INTO `productmaquinas` (`id`, `nombre`, `descripcion`, `precio`) VALUES
+(1, 'Cloud VPS S', 'Our most popular VPS. 8 CPU Cores & 30 GB RAM do the job!', 18.38),
+(2, 'Cloud VPS S', 'The cheapest way to get your own independent computing instance.', 6.53);
 
 -- --------------------------------------------------------
 
@@ -482,7 +503,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacion`, `estado`, `role`, `createdAt`, `updatedAt`) VALUES
-(1, 'Luis florez', 'florezgilluisantony@gmail.com', 'luis123', 1002028561, 1, 'ADMIN', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(1, 'Luis florez', 'florezgilluisantony@gmail.com', 'luis1234567', 1002028561, 1, 'ADMIN', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'alfred', 'alfred@gmail.com', 'alfred321', 2147483647, 0, 'USER', '0000-00-00 00:00:00', '2023-01-06 16:38:53'),
 (3, 'robert', 'robert@gmail.com', 'robert987', 1002458756, 1, 'USER', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'josena jera', 'josenajera@gmail.com', 'josenajera78', 1003654125, 1, 'USER', '2023-01-06 14:34:19', '2023-01-06 14:34:19'),
@@ -561,7 +582,8 @@ ALTER TABLE `maquinas`
   ADD KEY `region` (`region`),
   ADD KEY `almacenamiento` (`id_almacenamiento`),
   ADD KEY `sistemaOperativo` (`sistemaOperativo`),
-  ADD KEY `redes` (`redes`);
+  ADD KEY `redes` (`redes`),
+  ADD KEY `id_producMaquina` (`id_producMaquina`);
 
 --
 -- Indices de la tabla `monitorings`
@@ -579,6 +601,12 @@ ALTER TABLE `objectstorages`
 -- Indices de la tabla `panelsapps`
 --
 ALTER TABLE `panelsapps`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `productmaquinas`
+--
+ALTER TABLE `productmaquinas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -640,7 +668,7 @@ ALTER TABLE `almacenamientos`
 -- AUTO_INCREMENT de la tabla `asignacions`
 --
 ALTER TABLE `asignacions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `backupspaces`
@@ -695,6 +723,12 @@ ALTER TABLE `monitorings`
 --
 ALTER TABLE `objectstorages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `productmaquinas`
+--
+ALTER TABLE `productmaquinas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `redescomplementos`
@@ -780,7 +814,8 @@ ALTER TABLE `maquinas`
   ADD CONSTRAINT `maquinas_ibfk_2` FOREIGN KEY (`region`) REFERENCES `regiones` (`id`),
   ADD CONSTRAINT `maquinas_ibfk_3` FOREIGN KEY (`id_almacenamiento`) REFERENCES `almacenamientos` (`id`),
   ADD CONSTRAINT `maquinas_ibfk_4` FOREIGN KEY (`sistemaOperativo`) REFERENCES `sistemaos` (`id`),
-  ADD CONSTRAINT `maquinas_ibfk_5` FOREIGN KEY (`redes`) REFERENCES `redescomplementos` (`id`);
+  ADD CONSTRAINT `maquinas_ibfk_5` FOREIGN KEY (`redes`) REFERENCES `redescomplementos` (`id`),
+  ADD CONSTRAINT `maquinas_ibfk_6` FOREIGN KEY (`id_producMaquina`) REFERENCES `productmaquinas` (`id`);
 
 --
 -- Filtros para la tabla `redescomplementos`

@@ -6,12 +6,6 @@ const Maquinas = db.define('maquinas',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    nombre:{
-        type:DataTypes.STRING
-    },
-    descripcion:{
-        type:DataTypes.STRING
-    },
     region:{
         type: DataTypes.INTEGER
     },
@@ -30,9 +24,7 @@ const Maquinas = db.define('maquinas',{
     duracionPlazo:{
         type: DataTypes.STRING
     },
-    precio:{
-        type: DataTypes.FLOAT
-    }
+    
 });
 
 export default Maquinas;

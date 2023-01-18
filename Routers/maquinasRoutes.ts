@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { getMaquina, getMaquinas } from "../Controllers/maquinasControls";
+import { getAllProductMaquinas, getMaquina, getMaquinas, pacthMaquina } from "../Controllers/maquinasControls";
 
 const maquinasRoutes = Router();
 
 maquinasRoutes.get('/', getMaquinas);
+maquinasRoutes.get('/products', getAllProductMaquinas);
 maquinasRoutes.get('/:id', getMaquina);
+maquinasRoutes.patch('/:id',pacthMaquina);
 
 export  default maquinasRoutes;

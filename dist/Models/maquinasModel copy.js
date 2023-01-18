@@ -10,6 +10,12 @@ const Maquinas = db_1.default.define('maquinas', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
+    nombre: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    descripcion: {
+        type: sequelize_1.DataTypes.STRING
+    },
     region: {
         type: sequelize_1.DataTypes.INTEGER
     },
@@ -28,6 +34,9 @@ const Maquinas = db_1.default.define('maquinas', {
     duracionPlazo: {
         type: sequelize_1.DataTypes.STRING
     },
+    precio: {
+        type: sequelize_1.DataTypes.FLOAT
+    }
 });
 exports.default = Maquinas;
-//# sourceMappingURL=maquinasModel.js.map
+//# sourceMappingURL=maquinasModel%20copy.js.map

@@ -17,6 +17,7 @@ const comprasModel_1 = __importDefault(require("../Models/comprasModel"));
 const usersModel_1 = __importDefault(require("../Models/usersModel"));
 const maquinasModel_1 = __importDefault(require("../Models/maquinasModel"));
 const detallesComprasModels_1 = __importDefault(require("../Models/detallesComprasModels"));
+const productMaquinasModel_1 = __importDefault(require("../Models/productMaquinasModel"));
 const GetCompras = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         comprasModel_1.default.belongsTo(usersModel_1.default, {
@@ -39,9 +40,13 @@ const GetDetalleCompraById = (req, res) => __awaiter(void 0, void 0, void 0, fun
             foreignKey: "idMaquina",
             targetKey: "id",
         });
+        maquinasModel_1.default.belongsTo(productMaquinasModel_1.default, {
+            foreignKey: "id_producMaquina",
+            targetKey: "id",
+        });
         const detallecompra = yield detallesComprasModels_1.default.findAll({ where: {
                 id_compra: idCompra
-            }, include: [{ model: maquinasModel_1.default }] });
+            }, include: [{ model: maquinasModel_1.default, include: [{ model: productMaquinasModel_1.default }] }] });
         res.json(detallecompra);
     }
     catch (error) {

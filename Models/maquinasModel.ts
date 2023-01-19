@@ -6,6 +6,9 @@ const Maquinas = db.define('maquinas',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
+    id_producMaquina:{
+        type: DataTypes.INTEGER
+    },
     region:{
         type: DataTypes.INTEGER
     },

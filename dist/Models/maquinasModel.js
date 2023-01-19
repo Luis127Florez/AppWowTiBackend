@@ -10,6 +10,9 @@ const Maquinas = db_1.default.define('maquinas', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
+    id_producMaquina: {
+        type: sequelize_1.DataTypes.INTEGER
+    },
     region: {
         type: sequelize_1.DataTypes.INTEGER
     },

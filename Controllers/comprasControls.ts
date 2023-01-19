@@ -3,6 +3,7 @@ import Compras from "../Models/comprasModel";
 import Users from "../Models/usersModel";
 import Maquinas from "../Models/maquinasModel";
 import detallesCompras from "../Models/detallesComprasModels";
+import ProductMaquinas from "../Models/productMaquinasModel";
 
 
 export const GetCompras = async(req: Request, res:Response) =>{
@@ -27,9 +28,14 @@ export const GetDetalleCompraById = async(req: Request, res:Response) =>{
             targetKey: "id",
         });
 
+        Maquinas.belongsTo(ProductMaquinas,{
+            foreignKey: "id_producMaquina",
+            targetKey: "id",
+        })
+
         const detallecompra = await detallesCompras.findAll({ where:{
             id_compra: idCompra
-        },include:[{model: Maquinas}]});
+        },include:[{model: Maquinas , include:[{model: ProductMaquinas}]}]});
         
         res.json(detallecompra);
     } catch (error) {

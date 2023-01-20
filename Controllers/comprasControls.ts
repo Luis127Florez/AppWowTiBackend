@@ -12,7 +12,9 @@ export const GetCompras = async(req: Request, res:Response) =>{
             foreignKey: "idUser",
             targetKey: "id",
         });
-        const compras = await Compras.findAll({include:[{model: Users}]});
+        const compras = await Compras.findAll({where:{
+            estado: true
+        },include:[{model: Users}]});
         res.json(compras);
     } catch (error) {
         console.log(error);
@@ -38,6 +40,21 @@ export const GetDetalleCompraById = async(req: Request, res:Response) =>{
         },include:[{model: Maquinas , include:[{model: ProductMaquinas}]}]});
         
         res.json(detallecompra);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg: "hable con el admin"})
+    }
+}
+
+export const DeleteCompras = async(req: Request, res:Response) =>{
+    const {id} = req.params 
+    try {
+        const compras = await Compras.findByPk(id);
+        if (!compras) return res.json({msg: "no se encontro una compra con ese id"})
+        compras.update({
+            estado: false
+        });
+        res.json(compras);
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: "hable con el admin"})

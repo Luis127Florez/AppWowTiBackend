@@ -5,5 +5,6 @@ const comprasControls_1 = require("../Controllers/comprasControls");
 const comprasRoutes = (0, express_1.Router)();
 comprasRoutes.get('/', comprasControls_1.GetCompras);
 comprasRoutes.get('/:idCompra', comprasControls_1.GetDetalleCompraById);
+comprasRoutes.delete('/:id', comprasControls_1.DeleteCompras);
 exports.default = comprasRoutes;
 //# sourceMappingURL=comprasRoutes.js.map

@@ -1,9 +1,15 @@
 import { Request, Response } from "express";
 import Asignaciones from "../Models/asignacionModel";
+import Users from "../Models/usersModel";
 
 export const GetAsignacion = async(req: Request, res: Response)=>{
+    Asignaciones.belongsTo(Users,{
+        foreignKey: "idUser",
+        targetKey: 'id'
+    });
+
     try {
-        const asignacion = await Asignaciones.findAll();
+        const asignacion = await Asignaciones.findAll({include:[{model:Users}]});
         res.json(asignacion);
     } catch (error) {
         console.log(error);

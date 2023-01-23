@@ -6,10 +6,7 @@ const backupspaces = db.define('backupspaces',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    tamaño:{
-        type: DataTypes.INTEGER
-    },
-    tipo:{
+    nombre:{
         type: DataTypes.STRING
     },
     descripcion:{

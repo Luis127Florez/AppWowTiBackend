@@ -6,7 +6,10 @@ const Sll = db.define('slls',{
         type: DataTypes.INTEGER,
         primaryKey:true 
     },
-    tipo:{
+    nombre:{
+        type: DataTypes.STRING
+    },
+    descripcion:{
         type: DataTypes.STRING
     },
     precio:{

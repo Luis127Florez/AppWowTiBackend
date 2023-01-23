@@ -6,10 +6,13 @@ const Regiones = db.define('regiones',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    nombreRegion:{
+    nombre:{
         type:DataTypes.STRING
     },
-    precioUnitarioRegion:{
+    descripcion:{
+        type:DataTypes.STRING
+    },
+    precio:{
         type: DataTypes.FLOAT
     }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-01-2023 a las 23:21:01
+-- Tiempo de generación: 23-01-2023 a las 22:57:36
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -29,8 +29,9 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `almacenamientos` (
   `id` int(11) NOT NULL,
-  `tamañoAlmacenamiento` varchar(45) NOT NULL,
-  `precioAlmacenamiento` float NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `descripcion` text NOT NULL,
+  `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -39,8 +40,8 @@ CREATE TABLE `almacenamientos` (
 -- Volcado de datos para la tabla `almacenamientos`
 --
 
-INSERT INTO `almacenamientos` (`id`, `tamañoAlmacenamiento`, `precioAlmacenamiento`, `createdAt`, `updatedAt`) VALUES
-(1, '800 GB SSD', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `almacenamientos` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'Almacenamiento', '800 GB SSD', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -61,11 +62,8 @@ CREATE TABLE `asignacions` (
 --
 
 INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt`) VALUES
-(1, 12250, 3, '2023-01-07 15:40:31', '2023-01-07 15:40:31'),
-(4, 525533, 2, '2023-01-07 15:20:40', '2023-01-07 16:12:48'),
-(5, 69584, 2, '2023-01-07 15:42:34', '2023-01-07 15:42:34'),
-(19, 6543, 2, '2023-01-18 16:46:43', '2023-01-18 16:46:43'),
-(20, 6543, 2, '2023-01-18 19:39:44', '2023-01-18 19:39:44');
+(1, 12241, 3, '2023-01-07 15:40:31', '2023-01-21 16:08:43'),
+(4, 325533, 2, '2023-01-07 15:20:40', '2023-01-21 16:10:06');
 
 -- --------------------------------------------------------
 
@@ -74,8 +72,7 @@ INSERT INTO `asignacions` (`id`, `idProducto`, `idUser`, `createdAt`, `updatedAt
 --
 
 CREATE TABLE `backupspaces` (
-  `tamaño` int(11) NOT NULL,
-  `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `id` int(11) NOT NULL,
@@ -87,8 +84,9 @@ CREATE TABLE `backupspaces` (
 -- Volcado de datos para la tabla `backupspaces`
 --
 
-INSERT INTO `backupspaces` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
-(200, 'gb', 'sbdbsubn', 8.49, 1, '2023-01-13 17:48:03', '2023-01-13 17:48:03');
+INSERT INTO `backupspaces` (`nombre`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+('backupspaces', 'Almacenamiento FTP de 100 GB', 5.79, 1, '2023-01-13 17:48:03', '2023-01-13 17:48:03'),
+('backupspaces', 'none', 0, 2, '2023-01-23 21:37:02', '2023-01-23 21:37:02');
 
 -- --------------------------------------------------------
 
@@ -98,6 +96,7 @@ INSERT INTO `backupspaces` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `c
 
 CREATE TABLE `bandwidths` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `detalles` varchar(50) NOT NULL,
   `precio` int(11) NOT NULL,
@@ -109,8 +108,8 @@ CREATE TABLE `bandwidths` (
 -- Volcado de datos para la tabla `bandwidths`
 --
 
-INSERT INTO `bandwidths` (`id`, `descripcion`, `detalles`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, '32 TB + Unlimited InOut', '200 Mbit/s Connection', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `bandwidths` (`id`, `nombre`, `descripcion`, `detalles`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'bandwidths', '32 TB + Unlimited InOut', '200 Mbit/s Connection', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -156,8 +155,9 @@ CREATE TABLE `compras` (
 --
 
 INSERT INTO `compras` (`id`, `idUser`, `total`, `estado`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 47, 1, '2023-01-14 18:50:56', '2023-01-14 18:50:56'),
-(2, 8, 69, 1, '2023-01-16 17:51:10', '2023-01-16 17:51:10');
+(1, 2, 47, 1, '2023-01-14 18:50:56', '2023-01-20 16:15:06'),
+(2, 8, 69, 1, '2023-01-16 17:51:10', '2023-01-20 16:17:07'),
+(3, 4, 350.444, 1, '2023-01-19 16:50:38', '2023-01-20 16:18:53');
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,8 @@ INSERT INTO `detalle_compras` (`id`, `id_compra`, `cantidad`, `idMaquina`, `prec
 (1, 1, 2, 1, 18.38, 36.76, '2023-01-14 18:47:41', '2023-01-14 18:47:41'),
 (2, 1, 2, 1, 27.16, 36.76, '2023-01-14 19:19:48', '2023-01-14 19:19:48'),
 (3, 2, 1, 1, 27.16, 27.16, '2023-01-16 17:51:39', '2023-01-16 17:51:39'),
-(4, 2, 2, 1, 27.16, 54.32, '2023-01-16 17:52:19', '2023-01-16 17:52:19');
+(4, 2, 2, 1, 27.16, 54.32, '2023-01-16 17:52:19', '2023-01-16 17:52:19'),
+(5, 3, 1, 1, 27.16, 27.16, '2023-01-19 17:08:29', '2023-01-19 17:08:29');
 
 -- --------------------------------------------------------
 
@@ -194,6 +195,8 @@ INSERT INTO `detalle_compras` (`id`, `id_compra`, `cantidad`, `idMaquina`, `prec
 
 CREATE TABLE `ipv4s` (
   `id` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
@@ -204,8 +207,9 @@ CREATE TABLE `ipv4s` (
 -- Volcado de datos para la tabla `ipv4s`
 --
 
-INSERT INTO `ipv4s` (`id`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 8.49, '2023-01-13 21:12:25', '2023-01-13 21:12:25');
+INSERT INTO `ipv4s` (`id`, `nombre`, `descripcion`, `cantidad`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'ipv4', 'direcci ón IP', 1, 0, '2023-01-13 21:12:25', '2023-01-13 21:12:25'),
+(2, 'ipv4', 'dereccion ip', 2, 4.59, '2023-01-23 21:24:06', '2023-01-23 21:24:06');
 
 -- --------------------------------------------------------
 
@@ -242,7 +246,8 @@ INSERT INTO `maquinas` (`id`, `region`, `id_almacenamiento`, `sistemaOperativo`,
 
 CREATE TABLE `monitorings` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -252,8 +257,9 @@ CREATE TABLE `monitorings` (
 -- Volcado de datos para la tabla `monitorings`
 --
 
-INSERT INTO `monitorings` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'full', 8.49, '2023-01-13 17:43:55', '2023-01-13 17:43:55');
+INSERT INTO `monitorings` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, '  Full Monitoring', 'Full', 14.99, '2023-01-13 17:43:55', '2023-01-13 17:43:55'),
+(2, 'monitorings', 'none', 0, '2023-01-23 21:45:38', '2023-01-23 21:45:38');
 
 -- --------------------------------------------------------
 
@@ -262,8 +268,7 @@ INSERT INTO `monitorings` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VAL
 --
 
 CREATE TABLE `objectstorages` (
-  `tamaño` int(11) NOT NULL,
-  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `id` int(11) NOT NULL,
@@ -275,8 +280,9 @@ CREATE TABLE `objectstorages` (
 -- Volcado de datos para la tabla `objectstorages`
 --
 
-INSERT INTO `objectstorages` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
-(200, 'gb', 'object full', 8.49, 1, '2023-01-13 17:46:30', '2023-01-13 17:46:30');
+INSERT INTO `objectstorages` (`nombre`, `descripcion`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
+('objectstorages', 'object full 200 gb', 2.59, 1, '2023-01-13 17:46:30', '2023-01-13 17:46:30'),
+('objectStorage', 'none', 0, 2, '2023-01-23 21:34:36', '2023-01-23 21:34:36');
 
 -- --------------------------------------------------------
 
@@ -286,8 +292,8 @@ INSERT INTO `objectstorages` (`tamaño`, `tipo`, `descripcion`, `precio`, `id`, 
 
 CREATE TABLE `panelsapps` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(50) NOT NULL,
-  `version` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -297,7 +303,7 @@ CREATE TABLE `panelsapps` (
 -- Volcado de datos para la tabla `panelsapps`
 --
 
-INSERT INTO `panelsapps` (`id`, `tipo`, `version`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `panelsapps` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 'cPanel', 'cPanel/WHM (5 accounts)', 20.99, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 'cPanel', 'cPanel/WHM (30 accounts)', 25.99, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 'cPanel', 'cPanel/WHM (50 accounts)', 38.99, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -341,16 +347,18 @@ CREATE TABLE `productmaquinas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
-  `precio` float NOT NULL
+  `precio` float NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `productmaquinas`
 --
 
-INSERT INTO `productmaquinas` (`id`, `nombre`, `descripcion`, `precio`) VALUES
-(1, 'Cloud VPS S', 'Our most popular VPS. 8 CPU Cores & 30 GB RAM do the job!', 18.38),
-(2, 'Cloud VPS S', 'The cheapest way to get your own independent computing instance.', 6.53);
+INSERT INTO `productmaquinas` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'Cloud VPS S', 'Our most popular VPS. 8 CPU Cores & 30 GB RAM do the job!', 18.38, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Cloud VPS S', 'The cheapest way to get your own independent computing instance.', 6.53, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -382,7 +390,8 @@ INSERT INTO `redescomplementos` (`id`, `id_redPrivada`, `id_bandwidth`, `id_ipv4
 
 CREATE TABLE `redesprivadas` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -392,8 +401,8 @@ CREATE TABLE `redesprivadas` (
 -- Volcado de datos para la tabla `redesprivadas`
 --
 
-INSERT INTO `redesprivadas` (`id`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'sbdbsubn', 8.49, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `redesprivadas` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'red privada', 'Redes privadas habilitadas', 2.99, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -403,8 +412,9 @@ INSERT INTO `redesprivadas` (`id`, `descripcion`, `precio`, `createdAt`, `update
 
 CREATE TABLE `regiones` (
   `id` int(11) NOT NULL,
-  `nombreRegion` varchar(50) NOT NULL,
-  `precioUnitarioRegion` float NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL,
+  `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -413,8 +423,9 @@ CREATE TABLE `regiones` (
 -- Volcado de datos para la tabla `regiones`
 --
 
-INSERT INTO `regiones` (`id`, `nombreRegion`, `precioUnitarioRegion`, `createdAt`, `updatedAt`) VALUES
-(1, 'European Union (Germany)', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `regiones` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'European Union (Germany)', 'free', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'United Kingdom', 'not free', 0.72, '2023-01-23 21:00:38', '2023-01-23 21:00:38');
 
 -- --------------------------------------------------------
 
@@ -423,9 +434,10 @@ INSERT INTO `regiones` (`id`, `nombreRegion`, `precioUnitarioRegion`, `createdAt
 --
 
 CREATE TABLE `servermanagements` (
-  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `id` int(11) NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -434,8 +446,9 @@ CREATE TABLE `servermanagements` (
 -- Volcado de datos para la tabla `servermanagements`
 --
 
-INSERT INTO `servermanagements` (`tipo`, `precio`, `id`, `createdAt`, `updatedAt`) VALUES
-('gbfzdfz', 8.49, 1, '2023-01-13 17:48:47', '2023-01-13 17:48:47');
+INSERT INTO `servermanagements` (`nombre`, `precio`, `id`, `descripcion`, `createdAt`, `updatedAt`) VALUES
+('Server Management', 144.99, 1, 'Managed', '2023-01-13 17:48:47', '2023-01-13 17:48:47'),
+(' servermanagements', 0, 2, 'Unmanaged', '2023-01-23 21:41:51', '2023-01-23 21:41:51');
 
 -- --------------------------------------------------------
 
@@ -445,8 +458,8 @@ INSERT INTO `servermanagements` (`tipo`, `precio`, `id`, `createdAt`, `updatedAt
 
 CREATE TABLE `sistemaos` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(50) NOT NULL,
-  `versionSO` varchar(50) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -456,7 +469,7 @@ CREATE TABLE `sistemaos` (
 -- Volcado de datos para la tabla `sistemaos`
 --
 
-INSERT INTO `sistemaos` (`id`, `tipo`, `versionSO`, `precio`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `sistemaos` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
 (1, 'Ubuntu', 'Ubuntu 20.04', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -467,7 +480,8 @@ INSERT INTO `sistemaos` (`id`, `tipo`, `versionSO`, `precio`, `createdAt`, `upda
 
 CREATE TABLE `slls` (
   `id` int(11) NOT NULL,
-  `tipo` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `descripcion` text COLLATE utf8mb4_spanish2_ci NOT NULL,
   `precio` float NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
@@ -477,8 +491,9 @@ CREATE TABLE `slls` (
 -- Volcado de datos para la tabla `slls`
 --
 
-INSERT INTO `slls` (`id`, `tipo`, `precio`, `createdAt`, `updatedAt`) VALUES
-(1, 'full', 8.49, '2023-01-13 17:49:24', '2023-01-13 17:49:24');
+INSERT INTO `slls` (`id`, `nombre`, `descripcion`, `precio`, `createdAt`, `updatedAt`) VALUES
+(1, 'sll', 'SSL certificate', 89.99, '2023-01-13 17:49:24', '2023-01-13 17:49:24'),
+(2, 'sll', 'none', 0, '2023-01-23 21:49:19', '2023-01-23 21:49:19');
 
 -- --------------------------------------------------------
 
@@ -504,13 +519,14 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `email`, `contraseña`, `N_identificacion`, `estado`, `role`, `createdAt`, `updatedAt`) VALUES
 (1, 'Luis florez', 'florezgilluisantony@gmail.com', 'luis1234567', 1002028561, 1, 'ADMIN', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'alfred', 'alfred@gmail.com', 'alfred321', 2147483647, 0, 'USER', '0000-00-00 00:00:00', '2023-01-06 16:38:53'),
+(2, 'alfred', 'alfred@gmail.com', 'alfred321', 2147483647, 1, 'USER', '0000-00-00 00:00:00', '2023-01-06 16:38:53'),
 (3, 'robert', 'robert@gmail.com', 'robert987', 1002458756, 1, 'USER', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (4, 'josena jera', 'josenajera@gmail.com', 'josenajera78', 1003654125, 1, 'USER', '2023-01-06 14:34:19', '2023-01-06 14:34:19'),
 (6, 'pedro', 'pedro@gmail.com', 'pedro524', 1000235648, 1, 'USER', '2023-01-06 15:10:18', '2023-01-06 15:10:18'),
 (7, 'migel', 'migel@gmail.com', 'migel524', 1047483612, 0, 'USER', '2023-01-06 15:11:11', '2023-01-06 16:37:14'),
 (8, 'morris', 'morris@gmail.com', 'morris524', 100202456, 1, 'USER', '2023-01-06 15:37:30', '2023-01-06 15:37:30'),
-(9, 'franco', 'franco@gmail.com', '12345678', 100254584, 1, 'USER', '2023-01-06 15:37:58', '2023-01-06 15:37:58');
+(9, 'franco', 'franco@gmail.com', '12345678', 100254584, 1, 'USER', '2023-01-06 15:37:58', '2023-01-06 15:37:58'),
+(10, 'el hombre caiman ', 'franco1@gmail.com', '12345678', 10022141, 1, 'USER', '2023-01-23 16:56:02', '2023-01-23 16:56:02');
 
 --
 -- Índices para tablas volcadas
@@ -674,7 +690,7 @@ ALTER TABLE `asignacions`
 -- AUTO_INCREMENT de la tabla `backupspaces`
 --
 ALTER TABLE `backupspaces`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `bandwidths`
@@ -692,19 +708,19 @@ ALTER TABLE `complementos`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_compras`
 --
 ALTER TABLE `detalle_compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `ipv4s`
 --
 ALTER TABLE `ipv4s`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `maquinas`
@@ -716,13 +732,13 @@ ALTER TABLE `maquinas`
 -- AUTO_INCREMENT de la tabla `monitorings`
 --
 ALTER TABLE `monitorings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `objectstorages`
 --
 ALTER TABLE `objectstorages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `productmaquinas`
@@ -752,7 +768,7 @@ ALTER TABLE `regiones`
 -- AUTO_INCREMENT de la tabla `servermanagements`
 --
 ALTER TABLE `servermanagements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `sistemaos`
@@ -764,13 +780,13 @@ ALTER TABLE `sistemaos`
 -- AUTO_INCREMENT de la tabla `slls`
 --
 ALTER TABLE `slls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas
@@ -803,8 +819,7 @@ ALTER TABLE `compras`
 --
 ALTER TABLE `detalle_compras`
   ADD CONSTRAINT `detalle_compras_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`),
-  ADD CONSTRAINT `detalle_compras_ibfk_2` FOREIGN KEY (`id_compra`) REFERENCES `maquinas` (`id`),
-  ADD CONSTRAINT `detalle_compras_ibfk_3` FOREIGN KEY (`idMaquina`) REFERENCES `maquinas` (`id`);
+  ADD CONSTRAINT `detalle_compras_ibfk_2` FOREIGN KEY (`idMaquina`) REFERENCES `maquinas` (`id`);
 
 --
 -- Filtros para la tabla `maquinas`

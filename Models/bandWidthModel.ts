@@ -7,6 +7,9 @@ const BandWidth = db.define('bandWidths',{
        type: DataTypes.INTEGER,
        primaryKey: true  
     },
+    nombre:{
+        type: DataTypes.STRING
+    },
     descripcion:{
         type: DataTypes.STRING
     },

@@ -6,10 +6,10 @@ const sistemaOs = db.define('sistemaOs',{
         type: DataTypes.INTEGER,
         primaryKey:true
     },
-    tipo:{
+    nombre:{
         type:DataTypes.STRING
     },
-    versionSo:{
+    descripcion:{
         type: DataTypes.STRING
     },
     precio:{

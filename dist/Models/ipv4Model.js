@@ -10,6 +10,12 @@ const Ipv4 = db_1.default.define('ipv4s', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
+    nombre: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    descripcion: {
+        type: sequelize_1.DataTypes.STRING
+    },
     cantidad: {
         type: sequelize_1.DataTypes.INTEGER
     },

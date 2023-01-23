@@ -14,9 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteAsignacion = exports.UpdateAsignacion = exports.PostAsignacion = exports.GetAsignacionByIdUser = exports.GetAsignacion = void 0;
 const asignacionModel_1 = __importDefault(require("../Models/asignacionModel"));
+const usersModel_1 = __importDefault(require("../Models/usersModel"));
 const GetAsignacion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    asignacionModel_1.default.belongsTo(usersModel_1.default, {
+        foreignKey: "idUser",
+        targetKey: 'id'
+    });
     try {
-        const asignacion = yield asignacionModel_1.default.findAll();
+        const asignacion = yield asignacionModel_1.default.findAll({ include: [{ model: usersModel_1.default }] });
         res.json(asignacion);
     }
     catch (error) {

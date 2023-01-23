@@ -3,6 +3,7 @@ import Compras from "../Models/comprasModel";
 import Users from "../Models/usersModel";
 import Maquinas from "../Models/maquinasModel";
 import detallesCompras from "../Models/detallesComprasModels";
+import ProductMaquinas from "../Models/productMaquinasModel";
 
 
 export const GetCompras = async(req: Request, res:Response) =>{
@@ -11,7 +12,9 @@ export const GetCompras = async(req: Request, res:Response) =>{
             foreignKey: "idUser",
             targetKey: "id",
         });
-        const compras = await Compras.findAll({include:[{model: Users}]});
+        const compras = await Compras.findAll({where:{
+            estado: true
+        },include:[{model: Users}]});
         res.json(compras);
     } catch (error) {
         console.log(error);
@@ -27,11 +30,31 @@ export const GetDetalleCompraById = async(req: Request, res:Response) =>{
             targetKey: "id",
         });
 
+        Maquinas.belongsTo(ProductMaquinas,{
+            foreignKey: "id_producMaquina",
+            targetKey: "id",
+        })
+
         const detallecompra = await detallesCompras.findAll({ where:{
             id_compra: idCompra
-        },include:[{model: Maquinas}]});
+        },include:[{model: Maquinas , include:[{model: ProductMaquinas}]}]});
         
         res.json(detallecompra);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg: "hable con el admin"})
+    }
+}
+
+export const DeleteCompras = async(req: Request, res:Response) =>{
+    const {id} = req.params 
+    try {
+        const compras = await Compras.findByPk(id);
+        if (!compras) return res.json({msg: "no se encontro una compra con ese id"})
+        compras.update({
+            estado: false
+        });
+        res.json(compras);
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: "hable con el admin"})

@@ -6,7 +6,10 @@ const monitorings = db.define('monitoring',{
         type:DataTypes.INTEGER,
         primaryKey:true
     },
-    tipo:{
+    nombre:{
+        type: DataTypes.STRING
+    },
+    descripcion:{
         type: DataTypes.STRING
     },
     precio:{

@@ -10,10 +10,13 @@ const Almacenamientos = db_1.default.define('almacenamientos', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
-    tamañoAlmacenamiento: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
-    precioAlmacenamiento: {
+    descripcion: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    precio: {
         type: sequelize_1.DataTypes.FLOAT
     }
 });

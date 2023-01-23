@@ -10,10 +10,10 @@ const sistemaOs = db_1.default.define('sistemaOs', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
-    tipo: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
-    versionSo: {
+    descripcion: {
         type: sequelize_1.DataTypes.STRING
     },
     precio: {

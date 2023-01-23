@@ -6,7 +6,10 @@ const servermanagement = db.define('servermanagement',{
         type:'id',
         primaryKey: true
     },
-    tipo:{
+    nombre:{
+        type: DataTypes.STRING
+    },
+    descripcion:{
         type: DataTypes.STRING
     },
     precio:{

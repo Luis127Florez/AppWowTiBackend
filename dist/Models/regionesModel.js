@@ -10,10 +10,13 @@ const Regiones = db_1.default.define('regiones', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
-    nombreRegion: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
-    precioUnitarioRegion: {
+    descripcion: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    precio: {
         type: sequelize_1.DataTypes.FLOAT
     }
 });

@@ -9,10 +9,10 @@ const PanelsApps = db_1.default.define('panelsapps', {
     id: {
         type: sequelize_1.DataTypes.INTEGER
     },
-    tipo: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
-    version: {
+    descripcion: {
         type: sequelize_1.DataTypes.STRING
     },
     precioAlmacenamiento: {

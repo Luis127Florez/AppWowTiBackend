@@ -13,6 +13,6 @@ const Almacenamientos = db.define('almacenamientos',{
         type: DataTypes.FLOAT
     }
 
-})
+});
 
 export default Almacenamientos;

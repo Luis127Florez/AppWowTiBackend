@@ -161,55 +161,73 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             foreignKey: "region",
             targetKey: "id",
         });
-        //complementos
-        complementosMoldel_1.default.belongsTo(objectstorageModel_1.default, {
-            foreignKey: "ObjectStorage",
+        maquinasModel_1.default.belongsTo(complementosMoldel_1.default, {
+            foreignKey: "complementos",
             targetKey: "id",
         });
-        complementosMoldel_1.default.belongsTo(backupspaceModel_1.default, {
-            foreignKey: "BackupSpace",
+        maquinasModel_1.default.belongsTo(productMaquinasModel_1.default, {
+            foreignKey: "id_producMaquina",
+            targetKey: "id",
+        });
+        maquinasModel_1.default.belongsTo(redesComplementoModel_1.default, {
+            foreignKey: "redes",
             targetKey: "id",
         });
         complementosMoldel_1.default.belongsTo(servermanagementModel_1.default, {
             foreignKey: "ServerManagement",
             targetKey: "id",
         });
-        complementosMoldel_1.default.belongsTo(monitoringModel_1.default, {
-            foreignKey: "Monitoring",
-            targetKey: "id",
+        complementosMoldel_1.default.belongsTo(almacenamientoModel_1.default, {
+            foreignKey: 'ObjectStorage',
+            targetKey: 'id'
         });
-        complementosMoldel_1.default.belongsTo(sllModel_1.default, {
-            foreignKey: "sll_",
-            targetKey: "id",
+        redesComplementoModel_1.default.belongsTo(redesPrivadas_1.default, {
+            foreignKey: 'id_redPrivada',
+            targetKey: 'id'
+        });
+        redesComplementoModel_1.default.belongsTo(redesPrivadas_1.default, {
+            foreignKey: 'id_redPrivada',
+            targetKey: 'id'
+        });
+        redesComplementoModel_1.default.belongsTo(ipv4Model_1.default, {
+            foreignKey: 'id_ipv4',
+            targetKey: 'id'
+        });
+        redesComplementoModel_1.default.belongsTo(bandWidthModel_1.default, {
+            foreignKey: 'id_bandwidth',
+            targetKey: 'id'
         });
         const maquina = yield maquinasModel_1.default.findByPk(id, {
             include: [
                 { model: almacenamientoModel_1.default },
                 { model: sistemOsModel_1.default },
                 { model: regionesModel_1.default },
+                { model: productMaquinasModel_1.default },
+                { model: complementosMoldel_1.default, include: [{ model: servermanagementModel_1.default }, { model: almacenamientoModel_1.default }] },
+                { model: redesComplementoModel_1.default, include: [{ model: redesPrivadas_1.default }, { model: ipv4Model_1.default }, { model: bandWidthModel_1.default }] }
             ],
         });
-        const regiones = yield regionesModel_1.default.findAll();
+        const region = yield regionesModel_1.default.findAll();
         const bandWidth = yield bandWidthModel_1.default.findAll();
         const ipv4 = yield ipv4Model_1.default.findAll();
         const redesPrivadas = yield redesPrivadas_1.default.findAll();
-        const backupSpaces = yield backupspaceModel_1.default.findAll();
-        const objectStorages = yield objectstorageModel_1.default.findAll();
-        const serverManagement = yield servermanagementModel_1.default.findAll();
-        const monitoring = yield monitoringModel_1.default.findAll();
-        const sll = yield sllModel_1.default.findAll();
-        const sistemaO = yield sistemOsModel_1.default.findAll();
+        const BackupSpace = yield backupspaceModel_1.default.findAll();
+        const ObjectStorage = yield objectstorageModel_1.default.findAll();
+        const ServerManagement = yield servermanagementModel_1.default.findAll();
+        const Monitoring = yield monitoringModel_1.default.findAll();
+        const sll_ = yield sllModel_1.default.findAll();
+        const sistemaOperativo = yield sistemOsModel_1.default.findAll();
         if (!maquina ||
-            !regiones ||
+            !region ||
             !bandWidth ||
             !ipv4 ||
             !redesPrivadas ||
-            !backupSpaces ||
-            !objectStorages ||
-            !serverManagement ||
-            !monitoring ||
-            !sll ||
-            !sistemaO)
+            !BackupSpace ||
+            !ObjectStorage ||
+            !ServerManagement ||
+            !Monitoring ||
+            !sll_ ||
+            !sistemaOperativo)
             return res.status(401).json({
                 msg: "no exiten datos de la maquina",
             });
@@ -217,14 +235,14 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             maquina,
             bandWidth,
             ipv4,
-            regiones,
+            region,
             redesPrivadas,
-            backupSpaces,
-            objectStorages,
-            serverManagement,
-            monitoring,
-            sll,
-            sistemaO,
+            BackupSpace,
+            ObjectStorage,
+            ServerManagement,
+            Monitoring,
+            sll_,
+            sistemaOperativo,
         });
     }
     catch (error) {

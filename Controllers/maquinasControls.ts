@@ -157,59 +157,81 @@ export const pacthMaquina = async (req: Request, res: Response) => {
       targetKey: "id",
     });
 
-    //complementos
-    Complementos.belongsTo(objectstorages, {
-      foreignKey: "ObjectStorage",
+    Maquinas.belongsTo(Complementos, {
+      foreignKey: "complementos",
       targetKey: "id",
     });
-    Complementos.belongsTo(backupspaces, {
-      foreignKey: "BackupSpace",
+
+    Maquinas.belongsTo(ProductMaquinas, {
+      foreignKey: "id_producMaquina",
       targetKey: "id",
     });
+    
+    Maquinas.belongsTo(RedesComplemento, {
+      foreignKey: "redes",
+      targetKey: "id",
+    });
+
     Complementos.belongsTo(servermanagement, {
       foreignKey: "ServerManagement",
       targetKey: "id",
     });
-    Complementos.belongsTo(monitorings, {
-      foreignKey: "Monitoring",
-      targetKey: "id",
+
+    Complementos.belongsTo(Almacenamientos,{
+      foreignKey:'ObjectStorage',
+      targetKey:'id'
     });
-    Complementos.belongsTo(Sll, {
-      foreignKey: "sll_",
-      targetKey: "id",
-    });
+
+    RedesComplemento.belongsTo(RedesPrivadas,{
+      foreignKey: 'id_redPrivada',
+      targetKey: 'id'
+    })
+    RedesComplemento.belongsTo(RedesPrivadas,{
+      foreignKey: 'id_redPrivada',
+      targetKey: 'id'
+    })
+    RedesComplemento.belongsTo(Ipv4,{
+      foreignKey: 'id_ipv4',
+      targetKey: 'id'
+    })
+    RedesComplemento.belongsTo(BandWidth,{
+      foreignKey: 'id_bandwidth',
+      targetKey: 'id'
+    })
 
     const maquina = await Maquinas.findByPk(id, {
       include: [
         { model: Almacenamientos },
         { model: sistemaOs },
         { model: Regiones },
+        { model: ProductMaquinas },
+        {model: Complementos, include:[{model: servermanagement},{model: Almacenamientos}]},
+        {model: RedesComplemento, include:[{model: RedesPrivadas},{model:Ipv4},{model:BandWidth}]}
       ],
     });
-    const regiones = await Regiones.findAll();
+    const region = await Regiones.findAll();
     const bandWidth = await BandWidth.findAll();
     const ipv4 = await Ipv4.findAll();
     const redesPrivadas = await RedesPrivadas.findAll();
-    const backupSpaces = await backupspaces.findAll();
-    const objectStorages = await objectstorages.findAll();
-    const serverManagement = await servermanagement.findAll();
-    const monitoring = await monitorings.findAll();
-    const sll = await Sll.findAll();
-    const sistemaO = await sistemaOs.findAll();
+    const BackupSpace = await backupspaces.findAll();
+    const ObjectStorage = await objectstorages.findAll();
+    const ServerManagement = await servermanagement.findAll();
+    const Monitoring = await monitorings.findAll();
+    const sll_ = await Sll.findAll();
+    const sistemaOperativo = await sistemaOs.findAll();
     if (
       !maquina ||
-      !regiones ||
+      !region ||
       !bandWidth ||
       !ipv4 ||
       !redesPrivadas ||
-      !backupSpaces ||
-      !objectStorages ||
-      !serverManagement ||
-      !monitoring ||
-      !sll ||
-      !sistemaO
-    )
-      return res.status(401).json({
+      !BackupSpace ||
+      !ObjectStorage ||
+      !ServerManagement ||
+      !Monitoring ||
+      !sll_ ||
+      !sistemaOperativo
+    ) return res.status(401).json({
         msg: "no exiten datos de la maquina",
       });
 
@@ -217,14 +239,14 @@ export const pacthMaquina = async (req: Request, res: Response) => {
       maquina,
       bandWidth,
       ipv4,
-      regiones,
+      region,
       redesPrivadas,
-      backupSpaces,
-      objectStorages,
-      serverManagement,
-      monitoring,
-      sll,
-      sistemaO,
+      BackupSpace,
+      ObjectStorage,
+      ServerManagement,
+      Monitoring,
+      sll_,
+      sistemaOperativo,
     });
   } catch (error) {
     console.log({ error });

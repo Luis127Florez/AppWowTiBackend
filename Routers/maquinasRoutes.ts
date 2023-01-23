@@ -7,4 +7,4 @@ maquinasRoutes.get('/products', getAllProductMaquinas);
 maquinasRoutes.get('/:id', getMaquina);
 maquinasRoutes.patch('/:id',pacthMaquina);
 
-export  default maquinasRoutes;
+export default maquinasRoutes;

@@ -6,10 +6,7 @@ const objectstorages = db.define('objectstorages',{
         type:DataTypes.INTEGER,
         primaryKey:true
     },
-    tamaño:{
-        type: DataTypes.INTEGER
-    },
-    tipo:{
+    nombre:{
         type: DataTypes.STRING
     },
     descripcion:{

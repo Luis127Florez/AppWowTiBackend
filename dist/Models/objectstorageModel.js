@@ -10,10 +10,7 @@ const objectstorages = db_1.default.define('objectstorages', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
-    tamaño: {
-        type: sequelize_1.DataTypes.INTEGER
-    },
-    tipo: {
+    nombre: {
         type: sequelize_1.DataTypes.STRING
     },
     descripcion: {

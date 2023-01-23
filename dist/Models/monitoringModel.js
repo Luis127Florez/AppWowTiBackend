@@ -10,7 +10,10 @@ const monitorings = db_1.default.define('monitoring', {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true
     },
-    tipo: {
+    nombre: {
+        type: sequelize_1.DataTypes.STRING
+    },
+    descripcion: {
         type: sequelize_1.DataTypes.STRING
     },
     precio: {

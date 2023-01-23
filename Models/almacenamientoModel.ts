@@ -6,10 +6,13 @@ const Almacenamientos = db.define('almacenamientos',{
         type: DataTypes.INTEGER,
         primaryKey:true
     },
-    tamañoAlmacenamiento:{
+    nombre:{
         type:DataTypes.STRING
     },
-    precioAlmacenamiento:{
+    descripcion:{
+        type:DataTypes.STRING
+    },
+    precio:{
         type: DataTypes.FLOAT
     }
 

@@ -7,6 +7,9 @@ const RedesPrivadas = db.define('redesPrivadas',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
+    nombre:{
+        type: DataTypes.STRING
+    },
     descripcion:{
         type: DataTypes.STRING
     },

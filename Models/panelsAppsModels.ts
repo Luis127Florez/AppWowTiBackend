@@ -5,10 +5,10 @@ const PanelsApps = db.define('panelsapps',{
     id:{
         type: DataTypes.INTEGER
     },
-    tipo:{
+    nombre:{
         type:DataTypes.STRING
     },
-    version:{
+    descripcion:{
         type:DataTypes.STRING
     },
     precioAlmacenamiento:{

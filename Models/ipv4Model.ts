@@ -6,6 +6,12 @@ const Ipv4 = db.define('ipv4s',{
         type: DataTypes.INTEGER,
         primaryKey: true
     },
+    nombre:{
+        type: DataTypes.STRING
+    },
+    descripcion:{
+        type: DataTypes.STRING
+    },
     cantidad:{
         type: DataTypes.INTEGER
     },

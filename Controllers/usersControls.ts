@@ -33,7 +33,7 @@ export const PostUser = async (req: Request, res: Response) => {
       return res
         .status(404)
         .json({ msg: "ya existe un usuario con ese email" });
-    const users = await Users.build(body);
+    const users =  Users.build(body);
     console.log(users);
     await users.save();
     res.json(users);

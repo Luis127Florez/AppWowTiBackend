@@ -43,7 +43,7 @@ const PostUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res
                 .status(404)
                 .json({ msg: "ya existe un usuario con ese email" });
-        const users = yield usersModel_1.default.build(body);
+        const users = usersModel_1.default.build(body);
         console.log(users);
         yield users.save();
         res.json(users);

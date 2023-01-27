@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pacthMaquina = exports.getMaquina = exports.getAllProductMaquinas = void 0;
+exports.postMaquina = exports.pacthMaquina = exports.getMaquina = exports.getAllProductMaquinas = void 0;
 const almacenamientoModel_1 = __importDefault(require("../Models/almacenamientoModel"));
 const backupspaceModel_1 = __importDefault(require("../Models/backupspaceModel"));
 const bandWidthModel_1 = __importDefault(require("../Models/bandWidthModel"));
 const complementosMoldel_1 = __importDefault(require("../Models/complementosMoldel"));
+const comprasModel_1 = __importDefault(require("../Models/comprasModel"));
 const ipv4Model_1 = __importDefault(require("../Models/ipv4Model"));
 const maquinasModel_1 = __importDefault(require("../Models/maquinasModel"));
 const monitoringModel_1 = __importDefault(require("../Models/monitoringModel"));
@@ -178,24 +179,24 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             targetKey: "id",
         });
         complementosMoldel_1.default.belongsTo(almacenamientoModel_1.default, {
-            foreignKey: 'ObjectStorage',
-            targetKey: 'id'
+            foreignKey: "ObjectStorage",
+            targetKey: "id",
         });
         redesComplementoModel_1.default.belongsTo(redesPrivadas_1.default, {
-            foreignKey: 'id_redPrivada',
-            targetKey: 'id'
+            foreignKey: "id_redPrivada",
+            targetKey: "id",
         });
         redesComplementoModel_1.default.belongsTo(redesPrivadas_1.default, {
-            foreignKey: 'id_redPrivada',
-            targetKey: 'id'
+            foreignKey: "id_redPrivada",
+            targetKey: "id",
         });
         redesComplementoModel_1.default.belongsTo(ipv4Model_1.default, {
-            foreignKey: 'id_ipv4',
-            targetKey: 'id'
+            foreignKey: "id_ipv4",
+            targetKey: "id",
         });
         redesComplementoModel_1.default.belongsTo(bandWidthModel_1.default, {
-            foreignKey: 'id_bandwidth',
-            targetKey: 'id'
+            foreignKey: "id_bandwidth",
+            targetKey: "id",
         });
         const maquina = yield maquinasModel_1.default.findByPk(id, {
             include: [
@@ -203,8 +204,18 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
                 { model: sistemOsModel_1.default },
                 { model: regionesModel_1.default },
                 { model: productMaquinasModel_1.default },
-                { model: complementosMoldel_1.default, include: [{ model: servermanagementModel_1.default }, { model: almacenamientoModel_1.default }] },
-                { model: redesComplementoModel_1.default, include: [{ model: redesPrivadas_1.default }, { model: ipv4Model_1.default }, { model: bandWidthModel_1.default }] }
+                {
+                    model: complementosMoldel_1.default,
+                    include: [{ model: servermanagementModel_1.default }, { model: almacenamientoModel_1.default }],
+                },
+                {
+                    model: redesComplementoModel_1.default,
+                    include: [
+                        { model: redesPrivadas_1.default },
+                        { model: ipv4Model_1.default },
+                        { model: bandWidthModel_1.default },
+                    ],
+                },
             ],
         });
         const region = yield regionesModel_1.default.findAll();
@@ -217,6 +228,7 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const Monitoring = yield monitoringModel_1.default.findAll();
         const sll_ = yield sllModel_1.default.findAll();
         const sistemaOperativo = yield sistemOsModel_1.default.findAll();
+        const almacenamiento = yield almacenamientoModel_1.default.findAll();
         if (!maquina ||
             !region ||
             !bandWidth ||
@@ -227,7 +239,8 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             !ServerManagement ||
             !Monitoring ||
             !sll_ ||
-            !sistemaOperativo)
+            !sistemaOperativo ||
+            !almacenamiento)
             return res.status(401).json({
                 msg: "no exiten datos de la maquina",
             });
@@ -243,6 +256,7 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             Monitoring,
             sll_,
             sistemaOperativo,
+            almacenamiento,
         });
     }
     catch (error) {
@@ -253,4 +267,49 @@ const pacthMaquina = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.pacthMaquina = pacthMaquina;
+const postMaquina = (req, res) => {
+    console.log(req.body);
+    const { body } = req;
+    try {
+        if (!(body === null || body === void 0 ? void 0 : body.idUser)) {
+            console.log(body === null || body === void 0 ? void 0 : body.idUser);
+            return res.status(401).json({ url: '/login', msg: 'usuario tiene que antes haber iniciado session' });
+        }
+        const complementos = complementosMoldel_1.default.build({
+            ObjectStorage: body === null || body === void 0 ? void 0 : body.ObjectStorage,
+            BackupSpace: body === null || body === void 0 ? void 0 : body.BackupSpace,
+            ServerManagement: body === null || body === void 0 ? void 0 : body.ServerManagement,
+            Monitoring: body === null || body === void 0 ? void 0 : body.Monitoring,
+            sll_: body === null || body === void 0 ? void 0 : body.sll_,
+        });
+        const redesComplemento = redesComplementoModel_1.default.build({
+            id_redPrivada: body === null || body === void 0 ? void 0 : body.id_redPrivada,
+            id_bandwidth: body === null || body === void 0 ? void 0 : body.id_bandwidth,
+            id_ipv4: body === null || body === void 0 ? void 0 : body.id_ipv4,
+        });
+        const maquinas = maquinasModel_1.default.build({
+            region: body === null || body === void 0 ? void 0 : body.region,
+            id_almacenamiento: body === null || body === void 0 ? void 0 : body.id_almacenamiento,
+            sistemaOperativo: body === null || body === void 0 ? void 0 : body.sistemaOperativo,
+            redes: redesComplemento.dataValues.id,
+            complementos: complementos.dataValues.id,
+            duracionPlazo: body === null || body === void 0 ? void 0 : body.duracionPlazo,
+            id_producMaquina: body === null || body === void 0 ? void 0 : body.id_producMaquina
+        });
+        const compras = comprasModel_1.default.build({
+            idUser: body === null || body === void 0 ? void 0 : body.idUser,
+            total: body === null || body === void 0 ? void 0 : body.total
+        });
+        res.json({
+            msg: "listo",
+        });
+    }
+    catch (error) {
+        console.log({ error });
+        res.status(500).json({
+            msg: "Hable con el admin del servidor",
+        });
+    }
+};
+exports.postMaquina = postMaquina;
 //# sourceMappingURL=maquinasControls.js.map

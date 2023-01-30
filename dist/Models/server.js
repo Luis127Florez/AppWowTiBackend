@@ -19,6 +19,7 @@ const db_1 = __importDefault(require("../conexion/db"));
 const asignacionesRoutes_1 = __importDefault(require("../Routers/asignacionesRoutes"));
 const comprasRoutes_1 = __importDefault(require("../Routers/comprasRoutes"));
 const maquinasRoutes_1 = __importDefault(require("../Routers/maquinasRoutes"));
+const accionesContaboRoutes_1 = __importDefault(require("../Routers/accionesContaboRoutes"));
 class Server {
     constructor() {
         this.apiPaht = {
@@ -50,6 +51,7 @@ class Server {
         this.App.use(this.apiPaht.users, usersRoutes_1.default);
         this.App.use(this.apiPaht.asignaciones, asignacionesRoutes_1.default);
         this.App.use(this.apiPaht.maquinas, maquinasRoutes_1.default);
+        this.App.use(this.apiPaht.maquinas, accionesContaboRoutes_1.default);
         this.App.use(this.apiPaht.comprasRoutes, comprasRoutes_1.default);
     }
     conexion() {

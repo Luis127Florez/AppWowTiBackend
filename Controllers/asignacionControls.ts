@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Asignaciones from "../Models/asignacionModel";
 import Users from "../Models/usersModel";
+import axios from "axios";
+import request from "request-promise"
 
 export const GetAsignacion = async(req: Request, res: Response)=>{
     Asignaciones.belongsTo(Users,{
@@ -17,15 +19,32 @@ export const GetAsignacion = async(req: Request, res: Response)=>{
     }
 }
 
-export const GetAsignacionByIdUser  = async(req: Request, res: Response)=>{
-    const {idUser} = req.params
+export const GetAsignacionByIdUser  = async(req:Request, res: Response)=>{
+    const {idUser} = req.params;
+    const {access_token_contabo} = req.headers;
+    const dataMaquina = [];
+
     try {
         const asignacion = await Asignaciones.findAll({
             where:{
                 idUser: idUser
             }
         });
-        res.json(asignacion);
+        let Idmaquina:Number
+        for (let i = 0; i < asignacion.length; i++) {
+            Idmaquina = asignacion[i].dataValues.idProducto;
+            const data = await axios({
+                method: 'get',
+                url: `https://api.contabo.com/v1/compute/instances/${Idmaquina}`,
+                headers: {
+                    "Authorization": `Bearer ${access_token_contabo}`,
+                    "x-request-id":"51A87ECD-754E-4104-9C54-D01AD0F83409",
+                    "x-trace-id":"123214"
+                },
+              })          
+            dataMaquina.push(data.data.data[0]);  
+        }     
+        res.json(dataMaquina); 
     } catch (error) {
         console.log(error);
         res.status(500).json({msg: "hable con el admin"})

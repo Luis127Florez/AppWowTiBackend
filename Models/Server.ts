@@ -5,6 +5,7 @@ import db from '../conexion/db';
 import asignacionesRoutes from '../Routers/asignacionesRoutes';
 import comprasRoutes from '../Routers/comprasRoutes';
 import maquinasRoutes from '../Routers/maquinasRoutes';
+import accionesContaboRoutes from '../Routers/accionesContaboRoutes';
 
 
 class Server {
@@ -43,6 +44,7 @@ class Server {
     this.App.use(this.apiPaht.users, userRoutes);
     this.App.use(this.apiPaht.asignaciones, asignacionesRoutes);
     this.App.use(this.apiPaht.maquinas, maquinasRoutes);
+    this.App.use(this.apiPaht.maquinas, accionesContaboRoutes);
     this.App.use(this.apiPaht.comprasRoutes, comprasRoutes);
   }
 

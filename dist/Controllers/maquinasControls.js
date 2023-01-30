@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postMaquina = exports.pacthMaquina = exports.getMaquina = exports.getAllProductMaquinas = void 0;
+exports.GetAllMaquinasContabo = exports.postMaquina = exports.pacthMaquina = exports.getMaquina = exports.getAllProductMaquinas = void 0;
+const axios_1 = __importDefault(require("axios"));
 const almacenamientoModel_1 = __importDefault(require("../Models/almacenamientoModel"));
 const backupspaceModel_1 = __importDefault(require("../Models/backupspaceModel"));
 const bandWidthModel_1 = __importDefault(require("../Models/bandWidthModel"));
@@ -313,4 +314,24 @@ const postMaquina = (req, res) => {
     }
 };
 exports.postMaquina = postMaquina;
+const GetAllMaquinasContabo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { access_token_contabo } = req.headers;
+        const data = yield (0, axios_1.default)({
+            method: 'get',
+            url: `https://api.contabo.com/v1/compute/instances`,
+            headers: {
+                "Authorization": `Bearer ${access_token_contabo}`,
+                "x-request-id": "51A87ECD-754E-4104-9C54-D01AD0F83409",
+                "x-trace-id": "123214"
+            },
+        });
+        res.json(data.data);
+    }
+    catch (error) {
+        res.json('habla con el  admin');
+        console.log(error);
+    }
+});
+exports.GetAllMaquinasContabo = GetAllMaquinasContabo;
 //# sourceMappingURL=maquinasControls.js.map

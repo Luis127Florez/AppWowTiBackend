@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteAsignacion = exports.UpdateAsignacion = exports.PostAsignacion = exports.GetAsignacionByIdUser = exports.GetAsignacion = void 0;
 const asignacionModel_1 = __importDefault(require("../Models/asignacionModel"));
 const usersModel_1 = __importDefault(require("../Models/usersModel"));
+const axios_1 = __importDefault(require("axios"));
 const GetAsignacion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     asignacionModel_1.default.belongsTo(usersModel_1.default, {
         foreignKey: "idUser",
@@ -32,13 +33,29 @@ const GetAsignacion = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.GetAsignacion = GetAsignacion;
 const GetAsignacionByIdUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { idUser } = req.params;
+    const { access_token_contabo } = req.headers;
+    const dataMaquina = [];
     try {
         const asignacion = yield asignacionModel_1.default.findAll({
             where: {
                 idUser: idUser
             }
         });
-        res.json(asignacion);
+        let Idmaquina;
+        for (let i = 0; i < asignacion.length; i++) {
+            Idmaquina = asignacion[i].dataValues.idProducto;
+            const data = yield (0, axios_1.default)({
+                method: 'get',
+                url: `https://api.contabo.com/v1/compute/instances/${Idmaquina}`,
+                headers: {
+                    "Authorization": `Bearer ${access_token_contabo}`,
+                    "x-request-id": "51A87ECD-754E-4104-9C54-D01AD0F83409",
+                    "x-trace-id": "123214"
+                },
+            });
+            dataMaquina.push(data.data.data[0]);
+        }
+        res.json(dataMaquina);
     }
     catch (error) {
         console.log(error);

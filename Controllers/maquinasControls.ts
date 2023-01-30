@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Request, Response } from "express";
 import Almacenamientos from "../Models/almacenamientoModel";
 import backupspaces from "../Models/backupspaceModel";
@@ -318,3 +319,24 @@ export const postMaquina = (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const GetAllMaquinasContabo = async(req: Request, res: Response)=>{
+  try {
+    const {access_token_contabo}=req.headers;
+    const data = await axios({
+      method: 'get',
+      url: `https://api.contabo.com/v1/compute/instances`,
+      headers: {
+          "Authorization": `Bearer ${access_token_contabo}`,
+          "x-request-id":"51A87ECD-754E-4104-9C54-D01AD0F83409",
+          "x-trace-id":"123214"
+      },
+    })
+    res.json(data.data);
+  } catch (error) {
+    res.json('habla con el  admin')
+    console.log(error);
+    
+  }
+}

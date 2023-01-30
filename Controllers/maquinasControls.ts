@@ -272,45 +272,41 @@ export const pacthMaquina = async (req: Request, res: Response) => {
 
 export const postMaquina = (req: Request, res: Response) => {
   console.log(req.body);
-  const {body} = req;
+  const { body } = req;
   try {
-
-    if(!body?.idUser){
-      console.log(body?.idUser);
-      
-      return res.status(401).json({url:'/login', msg: 'usuario tiene que antes haber iniciado session'});
-    }
+    if (!body?.idUser)
+      return res.status(401).json({
+        url: "/login",
+        msg: "usuario tiene que antes haber iniciado session",
+      });
     const complementos = Complementos.build({
-      ObjectStorage: body?.ObjectStorage,  
-      BackupSpace : body?.BackupSpace,  
-      ServerManagement : body?.ServerManagement,  
-      Monitoring : body?.Monitoring,  
-      sll_ : body?.sll_,  
+      ObjectStorage: body?.ObjectStorage,
+      BackupSpace: body?.BackupSpace,
+      ServerManagement: body?.ServerManagement,
+      Monitoring: body?.Monitoring,
+      sll_: body?.sll_,
     });
 
     const redesComplemento = RedesComplemento.build({
-      id_redPrivada: body?.id_redPrivada, 
-      id_bandwidth : body?.id_bandwidth, 
-      id_ipv4: body?.id_ipv4, 
+      id_redPrivada: body?.id_redPrivada,
+      id_bandwidth: body?.id_bandwidth,
+      id_ipv4: body?.id_ipv4,
     });
 
     const maquinas = Maquinas.build({
       region: body?.region,
-      id_almacenamiento : body?.id_almacenamiento,
-      sistemaOperativo : body?.sistemaOperativo,
+      id_almacenamiento: body?.id_almacenamiento,
+      sistemaOperativo: body?.sistemaOperativo,
       redes: redesComplemento.dataValues.id,
-      complementos: complementos.dataValues.id,      
-      duracionPlazo : body?.duracionPlazo,
-      id_producMaquina : body?.id_producMaquina
+      complementos: complementos.dataValues.id,
+      duracionPlazo: body?.duracionPlazo,
+      id_producMaquina: body?.id_producMaquina,
     });
-    
+
     const compras = Compras.build({
       idUser: body?.idUser,
-      total: body?.total
-    })
-
-
-
+      total: body?.total,
+    });
 
     res.json({
       msg: "listo",

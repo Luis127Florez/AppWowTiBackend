@@ -271,10 +271,11 @@ const postMaquina = (req, res) => {
     console.log(req.body);
     const { body } = req;
     try {
-        if (!(body === null || body === void 0 ? void 0 : body.idUser)) {
-            console.log(body === null || body === void 0 ? void 0 : body.idUser);
-            return res.status(401).json({ url: '/login', msg: 'usuario tiene que antes haber iniciado session' });
-        }
+        if (!(body === null || body === void 0 ? void 0 : body.idUser))
+            return res.status(401).json({
+                url: "/login",
+                msg: "usuario tiene que antes haber iniciado session",
+            });
         const complementos = complementosMoldel_1.default.build({
             ObjectStorage: body === null || body === void 0 ? void 0 : body.ObjectStorage,
             BackupSpace: body === null || body === void 0 ? void 0 : body.BackupSpace,
@@ -294,11 +295,11 @@ const postMaquina = (req, res) => {
             redes: redesComplemento.dataValues.id,
             complementos: complementos.dataValues.id,
             duracionPlazo: body === null || body === void 0 ? void 0 : body.duracionPlazo,
-            id_producMaquina: body === null || body === void 0 ? void 0 : body.id_producMaquina
+            id_producMaquina: body === null || body === void 0 ? void 0 : body.id_producMaquina,
         });
         const compras = comprasModel_1.default.build({
             idUser: body === null || body === void 0 ? void 0 : body.idUser,
-            total: body === null || body === void 0 ? void 0 : body.total
+            total: body === null || body === void 0 ? void 0 : body.total,
         });
         res.json({
             msg: "listo",

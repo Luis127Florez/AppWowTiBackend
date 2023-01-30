@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteUser = exports.UpdateUser = exports.PatchUser = exports.GetUserByid = exports.PostUser = exports.GetUser = void 0;
 const usersModel_1 = __importDefault(require("../Models/usersModel"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield usersModel_1.default.findAll();
@@ -90,7 +92,7 @@ const PatchUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(user.dataValues.id);
         const token = jsonwebtoken_1.default.sign({
             id: user.dataValues.id,
-        }, "wowti", { expiresIn: 43200 });
+        }, `${process.env.PALABRACLAVE}`, { expiresIn: 43200 });
         res.json({ user, token, msg: "sign in" });
     }
     catch (error) {

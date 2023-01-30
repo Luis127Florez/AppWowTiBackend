@@ -1,5 +1,7 @@
 import { Request, Response , NextFunction} from "express";
 import axios from "axios";
+import  dotenv from "dotenv";
+dotenv.config();
 
 
 export const GetTokenContabo = async(req:Request, res:Response, next:NextFunction)=>{
@@ -9,10 +11,10 @@ export const GetTokenContabo = async(req:Request, res:Response, next:NextFunctio
             url: 'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token',
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             data: {
-                client_id: "INT-11681840",
-                client_secret: "FY6OIAAms6kq6CiSwhosdiLsqwgKkUMW",
-                username: "wowti@wowdesarrollos.com",
-                password: "IvB6EvI1993ns$eBNMB4sHTZg4lFm!",
+                client_id: `${process.env.CLIENTEIDCONTABO}`,
+                client_secret: `${process.env.CLIENTESECRETCONTABO}`,
+                username: `${process.env.USERNAMECONTABO}`,
+                password: `${process.env.PASSWORDCONTABO}`,
                 grant_type: "password"
             }
           });

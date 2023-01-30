@@ -15,12 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verificarTokenADMiN = exports.verificarToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const usersModel_1 = __importDefault(require("../Models/usersModel"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const verificarToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { token } = req.headers;
         if (!token)
             return res.status(403).json({ user: null, msg: "token null" });
-        const decode = jsonwebtoken_1.default.verify(token, 'wowti');
+        const decode = jsonwebtoken_1.default.verify(token, `${process.env.PALABRACLAVE}`);
         const user = yield usersModel_1.default.findByPk(decode.id);
         if (!user)
             return res.status(404).json({ user: null, msg: "Not user found" });

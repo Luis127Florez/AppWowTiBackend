@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { usuario } from "../helpers/types";
 import Users from "../Models/usersModel";
 import jwt from "jsonwebtoken";
+import  dotenv from "dotenv";
+dotenv.config();
 
 export const GetUser = async (req: Request, res: Response) => {
   try {
@@ -83,7 +85,7 @@ export const PatchUser = async (req: Request, res: Response) => {
       {
         id: user.dataValues.id,
       },
-      "wowti",
+      `${process.env.PALABRACLAVE}`,
       { expiresIn: 43200 }
     );
 

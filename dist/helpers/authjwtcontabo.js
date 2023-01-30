@@ -14,6 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetTokenContabo = void 0;
 const axios_1 = __importDefault(require("axios"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const GetTokenContabo = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield (0, axios_1.default)({
@@ -21,10 +23,10 @@ const GetTokenContabo = (req, res, next) => __awaiter(void 0, void 0, void 0, fu
             url: 'https://auth.contabo.com/auth/realms/contabo/protocol/openid-connect/token',
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             data: {
-                client_id: "INT-11681840",
-                client_secret: "FY6OIAAms6kq6CiSwhosdiLsqwgKkUMW",
-                username: "wowti@wowdesarrollos.com",
-                password: "IvB6EvI1993ns$eBNMB4sHTZg4lFm!",
+                client_id: `${process.env.CLIENTEIDCONTABO}`,
+                client_secret: `${process.env.CLIENTESECRETCONTABO}`,
+                username: `${process.env.USERNAMECONTABO}`,
+                password: `${process.env.PASSWORDCONTABO}`,
                 grant_type: "password"
             }
         });
